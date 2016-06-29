@@ -1,0 +1,31 @@
+{
+  "name": "fiw",
+  "authors": [
+    "Peter Braun <mail@peter-braun.org>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#~1.4.0",
+    "paper-input": "PolymerElements/paper-input#~1.1.11",
+    "paper-button": "PolymerElements/paper-button#~1.0.11",
+    "jquery": "~2.2.3",
+    "iron-flex-layout": "^1.3.1",
+    "iron-list": "^1.3.1",
+    "iron-scroll-threshold": "^1.0.2"
+  },
+  "resolutions": {
+    "polymer": "~1.4.0",
+    "webcomponentsjs": "0.7.22"
+  }
+}
