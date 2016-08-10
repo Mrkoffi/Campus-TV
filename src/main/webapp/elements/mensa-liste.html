@@ -1,0 +1,178 @@
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../bower_components/iron-list/iron-list.html">
+<link rel="import" href="../bower_components/paper-toolbar/paper-toolbar.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/paper-listbox/paper-listbox.html">
+<link rel="import" href="../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../bower_components/iron-dropdown/iron-dropdown.html">
+<link rel="import" href="../bower_components/iron-scroll-threshold/iron-scroll-threshold.html">
+<link rel="import" href="../bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+<link rel="import" href="../bower_components/iron-input/iron-input.html">
+<link rel="import" href="../bower_components/iron-icons/av-icons.html">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<link rel="import" href="my-mensa.html">
+<!--script src="../js/crossdomain.js"></script-->
+<dom-module id="mensa-liste">
+    <style>
+        .mitarbeiterCard {
+            @apply(--layout);
+            position: relative;
+            padding: 20px;
+        }
+
+        paper-toolbar.tall .title {
+            font-size: 40px;
+            line-height: 44px;
+            margin-left: 60px;
+            -webkit-transform-origin: left center;
+            transform-origin: left center;
+        }
+
+        .spacer {
+            @apply(--layout-flex);
+        }
+
+        .searchInput {
+            font-size: 20px;
+            padding: 10px 20px;
+            border: none;
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            -webkit-appearance: none;
+            border-radius: 0px;
+            width: 100%;
+        }
+
+        .typdropdown {
+            color: white;
+        }
+
+        .nextbutton {
+            font-size: 16px;
+            background-color: lightgrey;
+            --paper-button: {
+                @apply(--layout-vertical);
+                @apply(--layout-center-center);
+            };
+            margin: 0px;
+        }
+
+    </style>
+    <template>
+        <paper-toolbar class="tall">
+            <div class="bottom title">Mensaplaene der Woche</div>
+            <template is="dom-if" if="{{showSearchBar}}">
+                <input id="searchbar" is="iron-input" class="searchInput" type="search"
+                       placeholder="Suche ..."
+                       on-keyup="onKeyPress"
+                       bind-value="{{searchText}}">
+            </template>
+            <div class="spacer"></div>
+            <paper-icon-button icon="search" on-tap="toggleSearchBar"></paper-icon-button>
+            <paper-icon-button icon="more-vert" on-tap="openMenu"></paper-icon-button>
+            <paper-dropdown-menu label="Typ" class="dropdown typdropdown">
+                <paper-listbox class="dropdown-content">
+                    <paper-item>Mensa Hubland</paper-item>
+                    <paper-item>Mensateria</paper-item>
+                </paper-listbox>
+            </paper-dropdown-menu>
+        </paper-toolbar>
+        <!--byutv-jsonp auto url="{{url}}" on-response="handleAjaxResponse" handle-as="json" method="GET" headers='{"Access-Control-Allow-Origin": "*"}'></byutv-jsonp-->
+         <iron-ajax 
+             auto url="{{url}}" 
+             on-response="handleAjaxResponse" 
+             handle-as="json"></iron-ajax>
+        <!--core-ajax url="{{url}}" handleAs="json" response="{{employees}}" on-core-response="handleAjaxResponse" auto></core-ajax-->
+        
+            <iron-ajax 
+                auto
+          url="{{url}}"
+          params='{"type":"4249", "tx_thmensamenu_pi3[controller]":"Speiseplan", "Speiseplan&tx_thmensamenu_pi3[action]": "showjson", "tx_thmensamenu_pi3[mensen]": "54"}'
+          handle-as="text/html"
+          last-response="{{ajaxResponse}}">
+            </iron-ajax>
+        
+            <iron-list id="mliste" items="[]" as="item" scroll-target="document" grid class="flex">
+                
+            <template>
+                <div class="mitarbeiterCard" tabindex$="[[tabIndex]]">
+                    <my-mensa url$="{{item.self}}" on-show="onLecClick"></my-mensa>
+                </div>
+            </template>
+        </iron-list>
+        <paper-button class="nextbutton" raised on-tap="_loadMoreData" hidden$="{{nextButtonDisabled}}">Weiter
+        </paper-button>
+    </template>
+    <script>
+        Polymer({
+            is: 'mensa-liste',
+            properties: {
+                url :{
+                    type: String,
+                    value: ""
+                },
+                searchText: {
+                    type: String,
+                    value: ""
+                },
+                showSearchBar: {
+                    type: Boolean,
+                    value: false
+                }
+            },
+            attached: function () {
+                this._url = this.url;
+                this.response = [];
+            },
+            onKeyPress: function (e) {
+                this.clearList();
+                this.startQuery();
+            },
+            toggleSearchBar: function () {
+                console.log("Toggle Search Bar");
+                this.showSearchBar = !this.showSearchBar;
+                this.searchText = "";
+                this.clearList();
+                this.startQuery();
+            },
+            clearList: function () {
+                var mliste = this.$.mliste;
+                mliste.items = [];
+            },
+            onLecClick: function (e) {
+                console.log("Liste click on ..." + e.detail.url);
+                this.fire('lecturer', {'url': e.detail.url});
+            },
+            handleAjaxResponse: function (e, response) {
+                alert("url.toString()");
+                alert("url.to: "+ response);
+                console.log("Liste  ..." + response.toString());
+                var headers = response.toString();
+                var json = JSON.stringify(response.toString());
+                 alert("gggg" + response.xhr.toString());
+                var mliste = this.$.mliste;
+                   response.xhr.toString();
+                response.xhr.response.forEach(function (e) {
+                    mliste.push('items', e);
+                });
+                
+
+                mliste.notifyResize();
+
+//                var linkHeaders = parseLinkHeader(headers);
+//                this.queryUri = linkHeaders['find_by_name']['href'];
+//                this.nextPageUri = linkHeaders['next'] != undefined ? linkHeaders['next']['href'] : undefined;
+//                this.nextButtonDisabled = this.nextPageUri == undefined;
+//                console.log("Next page: " + this.nextPageUri);
+            },
+            startQuery: function () {
+                this._url = this.queryUri.replace("{NACHNAME}", this.searchText).replace("{VORNAME}", "")
+                        .replace("{OFFSET}", "0").replace("{SIZE}", "10");
+            },
+            _loadMoreData: function () {
+                console.log("Load more data");
+                this._url = this.nextPageUri;
+            }
+        });
+    </script>
+</dom-module>
