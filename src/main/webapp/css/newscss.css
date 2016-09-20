@@ -1,0 +1,136 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 28.01.2016, 18:11:22
+    Author     : Kpokpoya
+*/
+
+html,body {
+  position: relative;
+  height: 100%;
+  background:#616161;
+  overflow: hidden;
+}
+
+ #newsbody {background:#424242; width:100%; min-height:100%;}
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  background-color: #f5f5f5;
+}
+#footernews {
+  background:#616161; position:absolute; bottom:0; width:100%; height:60px;
+}
+ #head  {background:#616161; position:absolute; width:100%; height:60px;}
+ .facultynews  {background:#424242; height:100%; padding:60px 0 60px; box-sizing:border-box;overflow: auto;}
+ .facultynews > div.container{
+     padding: 0;
+ }
+
+#wrap {
+    height: 100%;
+}
+.portfolio-item {
+    margin-bottom: 25px;
+/*    height: 180px;*/
+}
+.facultynews p,h3,h4,h2,li,h1,small,h1 > small{
+    color:#FFF;
+}
+
+.facultynews a{
+    color:#FFAB00;
+}
+.img-responsive{
+    width: 150px;
+    height: 90px;
+}
+/*#sections div[id^='']:hover{
+    background-color: #FFA000 !important;
+}*/
+/*Für news */
+.row-fluid{
+/*     white-space: nowrap;*/
+}
+.row-fluid .col-md-3{
+     display: inline-block;
+}
+.portfolio-item:hover{
+    background-color: #757575 !important;
+}
+
+#nContainer p{
+    font-size: 20px;
+}
+p > a{
+    color: #fff;
+}
+.lead{
+    color: #fff;
+}
+#fakeheader{
+    border-bottom: 0px #616161;
+}
+.col-lg-7 , .col-sm-7 , .col-xs-8 {
+    float:none;
+    display:inline-block;
+    vertical-align:middle;
+    margin-right:-4px;
+}
+/*Für mensa */
+#jumb{
+     padding: 20px;
+}
+.jumbotron{
+/*    padding: 10px;*/
+    background: #757575;
+    color: #FFF;
+}
+.jumbotron h3{
+    background: #F9A825;/*#BDBDBD #FFE082*/
+    border-radius: 4px;
+}
+.jumbotron > div.container{
+    padding: 10px;
+    margin-bottom: 5px;
+    font-size: 20px;
+    border-bottom: solid #FFF;
+}
+.badge{
+     background: #F9A825;
+     font-size: 20px;
+}
+ul.dropdown-menu{
+    background: #757575;
+    color: #FFF;
+}
+/* Für Bus*/
+#jumb5,#jumb6,#eventContent{
+     padding: 20px;
+      font-size: 18px;
+}
+
+#jumb5,#jumb6 > h3{
+    text-align: center;
+    padding: 5px;
+}
+#fahr214,#fahr214ab,#fahr214b,#fahr214abb,#eventContent{
+    color:#000;
+}
+/*Lectures*/
+#jumb6{
+font-size: 30px;  
+}
+#jumb6 td,#jumb5 td{
+font-size: 24px;  
+}
+/*Important*/
+ .imp  * {
+    font-size: 30px;
+}

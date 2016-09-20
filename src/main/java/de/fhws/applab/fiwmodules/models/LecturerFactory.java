@@ -60,7 +60,7 @@ public class LecturerFactory
 	{
 		return this.mapIdToLecturers.values( )
 			.stream( )
- 			.filter( lecturer -> matchesRequest( firstName, lastName, lecturer ) ) 
+			.filter( lecturer -> matchesRequest( firstName, lastName, lecturer ) )
 			.sorted( new LecturerComparator( ) )
 			.map( lecturer -> cloneLecturer( lecturer ) )
 			.collect( Collectors.toList( ) );

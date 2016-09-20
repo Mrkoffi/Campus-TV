@@ -1,0 +1,74 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 18.01.2016, 14:23:31
+    Author     : Kpokpoya
+*/
+
+html,body
+{
+    height: 100%;
+}
+header,footer,div
+{
+   width: 100%; 
+}
+.container
+{
+    height: 100%;
+    background: pink;
+    margin: -64px 0 -30px;
+    padding: 64px 0 30px;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+#content {
+    overflow:auto;
+    height:100%;
+}
+.block
+{
+    width: 100%;
+    height: 50%;
+    display: inline-block;
+    border: 1px solid yellow;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    text-align: center;
+}
+header
+{
+    height: 64px;
+    background: purple;
+    position: relative;
+    z-index:1;
+}
+footer
+{
+    height: 30px;
+    background: gray;
+    position: relative;
+    z-index:1;
+}
+.navbar-fixed-top{
+    text-align:center; 
+    position: relative;
+     height: 8%; 
+     background: #616161;
+     position: fixed;
+}
+.middle{
+/*    height: 80%;*/
+    margin-left: 30%;
+}
+#wrap {
+  min-height: 100%;
+  height: 100%;
+  /* Negative indent footer by its height */
+  margin: 0 auto -82px 0;
+  /* Pad bottom by footer height */
+  padding: 0 0 80px 0;
+}

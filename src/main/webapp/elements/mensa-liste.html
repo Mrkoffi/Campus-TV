@@ -9,9 +9,9 @@
 <link rel="import" href="../bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
 <link rel="import" href="../bower_components/iron-input/iron-input.html">
 <link rel="import" href="../bower_components/iron-icons/av-icons.html">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<link rel="import" href="my-mensa.html">
-<!--script src="../js/crossdomain.js"></script-->
+<link rel="import" href="my-menu.html">
+<script src="../js/linkheader.js"></script>
+
 <dom-module id="mensa-liste">
     <style>
         .mitarbeiterCard {
@@ -60,7 +60,7 @@
     </style>
     <template>
         <paper-toolbar class="tall">
-            <div class="bottom title">Mensaplaene der Woche</div>
+            <div class="bottom title">Mensaplan der Woche</div>
             <template is="dom-if" if="{{showSearchBar}}">
                 <input id="searchbar" is="iron-input" class="searchInput" type="search"
                        placeholder="Suche ..."
@@ -72,31 +72,23 @@
             <paper-icon-button icon="more-vert" on-tap="openMenu"></paper-icon-button>
             <paper-dropdown-menu label="Typ" class="dropdown typdropdown">
                 <paper-listbox class="dropdown-content">
-                    <paper-item>Mensa Hubland</paper-item>
                     <paper-item>Mensateria</paper-item>
+                    <paper-item>Mensa Hubland</paper-item>
+                    <paper-item>Mensa Sanderring</paper-item>
+                    <paper-item>Andere Mensa</paper-item>
                 </paper-listbox>
             </paper-dropdown-menu>
         </paper-toolbar>
-        <!--byutv-jsonp auto url="{{url}}" on-response="handleAjaxResponse" handle-as="json" method="GET" headers='{"Access-Control-Allow-Origin": "*"}'></byutv-jsonp-->
-         <iron-ajax 
-             auto url="{{url}}" 
-             on-response="handleAjaxResponse" 
-             handle-as="json"></iron-ajax>
-        <!--core-ajax url="{{url}}" handleAs="json" response="{{employees}}" on-core-response="handleAjaxResponse" auto></core-ajax-->
-        
-            <iron-ajax 
-                auto
-          url="{{url}}"
-          params='{"type":"4249", "tx_thmensamenu_pi3[controller]":"Speiseplan", "Speiseplan&tx_thmensamenu_pi3[action]": "showjson", "tx_thmensamenu_pi3[mensen]": "54"}'
-          handle-as="text/html"
-          last-response="{{ajaxResponse}}">
-            </iron-ajax>
-        
-            <iron-list id="mliste" items="[]" as="item" scroll-target="document" grid class="flex">
-                
-            <template>
+        <iron-ajax auto 
+                   url="{{_url}}" 
+                   on-response="handleAjaxResponse" 
+                   headers='{"Accept": "application/vnd.fhws-meal.default+json"}'
+                   handle-as="json">
+        </iron-ajax>
+        <iron-list id="mliste" items="[]" as="item" scroll-target="document" grid class="flex">
+            <template is="dom-repeat">
                 <div class="mitarbeiterCard" tabindex$="[[tabIndex]]">
-                    <my-mensa url$="{{item.self}}" on-show="onLecClick"></my-mensa>
+                    <my-menu url$="{{item.self.href}}" on-show="onLecClick"></my-menu>
                 </div>
             </template>
         </iron-list>
@@ -107,7 +99,7 @@
         Polymer({
             is: 'mensa-liste',
             properties: {
-                url :{
+                url: {
                     type: String,
                     value: ""
                 },
@@ -144,26 +136,15 @@
                 this.fire('lecturer', {'url': e.detail.url});
             },
             handleAjaxResponse: function (e, response) {
-                alert("url.toString()");
-                alert("url.to: "+ response);
-                console.log("Liste  ..." + response.toString());
-                var headers = response.toString();
-                var json = JSON.stringify(response.toString());
-                 alert("gggg" + response.xhr.toString());
+                //var headers = response.xhr.getResponseHeader('Link');
                 var mliste = this.$.mliste;
-                   response.xhr.toString();
-                response.xhr.response.forEach(function (e) {
-                    mliste.push('items', e);
-                });
-                
-
+                //var correct = escapeSpecialChars(response.xhr.response);
+                //alert("ResponsetextRoh: " + e.detail.response);
+                //response.xhr.response.
+                for (var i = 0, len = e.detail.response.length; i < len; i++) {
+                     mliste.push('items', e.detail.response[i]);
+                }
                 mliste.notifyResize();
-
-//                var linkHeaders = parseLinkHeader(headers);
-//                this.queryUri = linkHeaders['find_by_name']['href'];
-//                this.nextPageUri = linkHeaders['next'] != undefined ? linkHeaders['next']['href'] : undefined;
-//                this.nextButtonDisabled = this.nextPageUri == undefined;
-//                console.log("Next page: " + this.nextPageUri);
             },
             startQuery: function () {
                 this._url = this.queryUri.replace("{NACHNAME}", this.searchText).replace("{VORNAME}", "")

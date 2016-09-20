@@ -1,0 +1,242 @@
+
+html,
+body {
+    height: 100%;
+}
+
+/* Wrapper for page content to push down footer */
+#wrap {
+    min-height: 100%;
+    /*  height: 100%;*/
+    /* Negative indent footer by its height */
+      margin: 0 auto -60px auto;
+    /* Pad bottom by footer height */
+    /*  padding: 0 0 80px 0;*/
+}
+
+/* Set the fixed height of the footer here */
+#footer {
+     background: #616161;
+    margin-top:1px;
+    width: 100%;
+}
+
+
+#wrap > .center-container {
+    /*  padding: 5%;*/
+    margin:0;
+}
+
+#footer > .container {
+    /*  padding-top:5px;*/
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.center-container {
+    width:100%;
+    margin: 0;
+    position: absolute;
+    top:10%;
+    height: 90%;
+    margin: 0 auto 80px;
+    background: #424242;
+}
+/*
+.center-row {
+    height:50%;
+    width:100%;
+    display: table-row;
+}*/
+
+.navbar-header {
+    display:table;
+    margin:auto;
+    height: 100%;
+}
+.navbar-header > h1{
+    display:table;
+    margin:0;
+    height: 100%;
+    width: 100%;
+}
+.navbar-header h1  span {
+    width: 100%;
+    height: 100%;
+    display: table-cell;
+    vertical-align: middle;
+    background: #616161;
+}
+img.bbt{
+    height: 60px;
+    width: 60px;
+}
+.navbar-fixed-top{
+    text-align:center; 
+    height: 60px; 
+    background: #616161;
+    position: fixed;
+    overflow: hidden;
+}
+
+.bbt {
+    background: url("../img/backb.png") #f1c40f no-repeat center center;
+    height: 50px;
+    width: 50px;
+}
+.menu{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 50%;
+    height: 30%;
+    margin: auto;
+}
+.top{
+    height: 8%;
+}
+.middle{
+    /*    height: 80%;*/
+    margin-left: 28%;
+    font-size: 18px;
+    margin-top: 0;
+}
+.middle h1{
+    font-size: 38px;
+    margin-top: 0;
+}
+
+.wrapper {
+    position:relative;
+    margin:0 auto;
+    overflow:hidden;
+    padding:5px;
+    height:35%;
+}
+
+.scroller {
+    text-align:center;
+    cursor:pointer;
+    display:none;
+    padding:7px;
+    padding-top:11px;
+      white-space:no-wrap;
+    vertical-align:middle;
+    background-color:#fff;
+}
+
+.col-md-8 img{
+    width: 300px;
+    height: 400px;
+}
+
+.nav-justified{
+    margin-bottom: 10px;
+}
+div.col-sm-3.col-xs-6{
+height: 200px;
+}
+div.col-sm-3.col-xs-6.vcenter{
+    display: table;
+    position: relative;
+}
+.col-sm-3.col-xs-6.col-lg-4.vcenter img{
+    display: table-cell;
+    vertical-align: middle;
+    height: 155px;
+    width: 100%;
+    text-align: center;
+/*    float: none;*/
+}
+col-sm-3.col-xs-6.col-lg-4.vcenter h3{
+    display: block;
+    vertical-align: middle;
+    float: none;
+}
+#mywrapper {width: 100%;
+            height: 80%;
+            margin: 0;
+/*            padding-bottom: 8%;*/
+/*            margin: 35px auto 0 auto;*/
+/*            background: #333;*/
+float: none;
+}
+
+#persName{
+    margin-bottom: 0;
+}
+h4{overflow:hidden;}
+h4 span{
+white-space: nowrap;
+}
+
+.innertext {
+    display:inline-block;
+    width:90%
+}
+.center-block {
+    padding: 2px;
+}
+.my-thumbs-list{
+  overflow: auto;
+  width: 100%;
+  height: 220px;
+}
+#lili{
+    white-space: nowrap;
+    height: 100%;
+}
+
+.portrait img {
+    width: 100%;
+}
+.landscape img {
+    height: 100%;
+}
+
+
+#facbody {
+    background: #424242;
+}
+
+.faculty a, p,h3,h4,h2,li{
+    color:#FFF;
+}
+
+.nav-pills > li.active > a,
+.nav-pills > li.active > a:focus,
+.nav-pills > li.active > a:hover{
+    background-color: #FFA000 !important;
+}
+.nav-pills > li > a:hover{
+    background-color: #FFE082 !important;
+    color:#fff;
+}
+.nav-pills > li > a{
+    background-color: #FFD54F !important;
+}
+.label-default{
+    background: #FFAB00;
+    border-radius: 2px;
+}
+#containP p,li{
+    font-size: 25px;
+}
+#containT p,li{
+    font-size: 25px;
+}
+#containW p,li{
+    font-size: 25px;
+}
+
+#test{
+    background-image: url("../img/dozenten/aubele.jpg");
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+.portfolio-item {
+    margin-bottom: 25px;
+    max-width:100%;
+}
