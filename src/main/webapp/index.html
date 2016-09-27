@@ -1,318 +1,323 @@
-    <!doctype html>
-    <!--
-    @license
-    Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
-    This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-    The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-    The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-    Code distributed by Google as part of the polymer project is also
-    subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
-    -->
-    <html lang="en">
-    <head>
-      <title>paper-card demo</title>
-      <meta charset="utf-8">
-      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-      <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
+        <!doctype html>
+        <!--
+        @license
+        Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+        This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+        The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+        The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+        Code distributed by Google as part of the polymer project is also
+        subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+        -->
+        <html lang="en">
+        <head>
+          <title>paper-card demo</title>
+          <meta charset="utf-8">
+          <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+          <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
 
-        <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
-        <script type="text/javascript" src="./js/utils.js"></script>
-         <link rel="stylesheet" href="css/firstcss.css">
-        <link rel="stylesheet" href="css/newcss.css">
-         <link rel="stylesheet" href="css/newscss.css">
-         <link rel="stylesheet" href="css/bootstrap-theme.min.css">
-         <link rel="stylesheet" href="css/bootstrap.css">
-         <link rel="stylesheet" href="css/bootstrap.min.css">
-    <script type="text/javascript" src="http://oap.accuweather.com/launch.js"></script>
+            <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
+            <script type="text/javascript" src="./js/utils.js"></script>
+            <script type="text/javascript" src="./js/model.js"></script>
+            <script type="text/javascript" src="./js/crossdomain.js"></script>
 
-        <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" />
-      <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
-      <link rel="import" href="bower_components/iron-demo-helpers/demo-snippet.html">
-      <link rel="import" href="bower_components/iron-demo-helpers/demo-pages-shared-styles.html">
-      <link rel="import" href="bower_components/iron-collapse/iron-collapse.html">
-      <link rel="import" href="bower_components/iron-icons/iron-icons.html">
-      <link rel="import" href="bower_components/iron-icons/communication-icons.html">
-      <link rel="import" href="bower_components/iron-icons/hardware-icons.html">
-      <link rel="import" href="bower_components/iron-icons/social-icons.html">
-      <link rel="import" href="bower_components/iron-flex-layout/iron-flex-layout.html">
-      <link rel="import" href="bower_components/paper-button/paper-button.html">
-      <link rel="import" href="bower_components/paper-checkbox/paper-checkbox.html">
-      <link rel="import" href="bower_components/paper-icon-button/paper-icon-button.html">
-      <link rel="import" href="bower_components/paper-styles/color.html">
-      <link rel="import" href="bower_components/paper-styles/default-theme.html">
-      <link rel="import" href="bower_components/paper-styles/typography.html">
-      <link rel="import" href="bower_components/paper-card/paper-card.html">
-      <link rel="import" href="bower_components/paper-toolbar/paper-toolbar.html">
-    </head>
+             <link rel="stylesheet" href="css/firstcss.css">
+            <link rel="stylesheet" href="css/newcss.css">
+             <link rel="stylesheet" href="css/newscss.css">
+             <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+             <link rel="stylesheet" href="css/bootstrap.css">
+             <link rel="stylesheet" href="css/bootstrap.min.css">
+        <script type="text/javascript" src="http://oap.accuweather.com/launch.js"></script>
 
-    <body>     
-    <dom-module id="sample-element">
-        <template>
-    <style is="custom-style">
-        paper-card {
-          width: 100%;
-        }
-        .horizontal {
-          @apply(--layout-horizontal);
-        }
-        .justified {
-          @apply(--layout-justified);
-        }
-        .amber {
-          background: var(--paper-amber-900);
-        }
-        .lime {
-          background: var(--paper-lime-500);
-        }
-        .cyan {
-          background: var(--paper-cyan-500);
-        }
-        .dark {
-          background: var(--paper-blue-grey-500);
-        }
-        paper-card.dark, paper-card.amber, paper-card.lime, paper-card.cyan {
-          color: white;
-          --paper-card-header-color: white;
-        }
-        paper-checkbox {
-          display: block;
-          margin-bottom: 4px;
-          --paper-checkbox-label-color: white;
-          --paper-checkbox-unchecked-color: white;
-        }
-        paper-icon-button {
-          color: var(--paper-grey-600);
-        }
-        paper-icon-button.white {
-          color: white !important;
-        }
-        app-toolbar {
-            /* Toolbar is the main header, so give it some color */
-            background-color: #1E88E5;
-            font-family: 'Roboto', Helvetica, sans-serif;
-            color: white;
-            --app-toolbar-font-size: 24px;
-          }
-            paper-toolbar paper-progress {
-          --paper-progress-active-color: var(--accent-color);
-        }
-        .spacer {
-          @apply(--layout-flex);
-        }
-      #notes {
-        @apply(--layout-vertical);
-        @apply(--layout-wrap);
-        height: 344px;
-        width: 384px;
-      }
+            <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" />
+          <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+          <link rel="import" href="bower_components/iron-demo-helpers/demo-snippet.html">
+          <link rel="import" href="bower_components/iron-demo-helpers/demo-pages-shared-styles.html">
+          <link rel="import" href="bower_components/iron-collapse/iron-collapse.html">
+          <link rel="import" href="bower_components/iron-icons/iron-icons.html">
+          <link rel="import" href="bower_components/iron-icons/communication-icons.html">
+          <link rel="import" href="bower_components/iron-icons/hardware-icons.html">
+          <link rel="import" href="bower_components/iron-icons/social-icons.html">
+          <link rel="import" href="bower_components/iron-flex-layout/iron-flex-layout.html">
+          <link rel="import" href="bower_components/paper-button/paper-button.html">
+          <link rel="import" href="bower_components/paper-checkbox/paper-checkbox.html">
+          <link rel="import" href="bower_components/paper-icon-button/paper-icon-button.html">
+          <link rel="import" href="bower_components/paper-styles/color.html">
+          <link rel="import" href="bower_components/paper-styles/default-theme.html">
+          <link rel="import" href="bower_components/paper-styles/typography.html">
+          <link rel="import" href="bower_components/paper-card/paper-card.html">
+          <link rel="import" href="bower_components/paper-toolbar/paper-toolbar.html">
+        </head>
 
-      #notes > paper-card {
-        box-sizing: border-box;
-        max-width: 184px;
-        margin: 4px;
-        flex: 0 0 auto;
-      }
-      #notes > paper-card.test{
-           @apply(--layout-vertical);
-        @apply(--layout-wrap);
-        box-sizing: border-box;
-        max-width: 284px;
-        margin: 4px;
-        flex: 0 0 auto;
-      }
-                  #notes > paper-card.amber{
-           @apply(--layout-vertical);
-        @apply(--layout-wrap);
-        box-sizing: border-box;
-        max-width: 284px;
-        margin: 4px;
-        flex: 0 0 auto;
-      }
-                
-                 #notes > paper-card.testo{
-           @apply(--layout-vertical);
-        @apply(--layout-wrap);
-        box-sizing: border-box;
-        max-width: 284px;
-        margin: 4px;
-        flex: 0 0 auto;
-      }
-        .cafe-header { @apply(--paper-font-headline); }
-      .cafe-light { color: var(--paper-grey-600); }
-      .cafe-location {
-        float: right;
-        font-size: 15px;
-        vertical-align: middle;
-      }
-      .cafe-reserve { color: var(--google-blue-500); }
-      iron-icon.star {
-        --iron-icon-width: 16px;
-        --iron-icon-height: 16px;
-        color: var(--paper-amber-500);
-      }
-      iron-icon.star:last-of-type { color: var(--paper-grey-500); }
-    </style>
-
-        <paper-drawer-panel>
-
-    <paper-toolbar>
-      <paper-icon-button icon="menu"></paper-icon-button>
-          <span class="title">Campus TV</span>
-          <paper-icon-item>
-        <!--iron-icon icon="communication:phone" item-icon>
-        </iron-icon-->
-        <paper-item-body one-line>
-          <div class="time">14h54m</div>
-        </paper-item-body>
-      </paper-icon-item>
-          <paper-item-body>
-                  <div class="navbar-header weather">
-                                <a href="http://www.accuweather.com/de/de/wurzburg/97070/weather-forecast/167557" class="aw-widget-legal">
-                                    <!--
-                                    By accessing and/or using this code snippet, you agree to AccuWeather’s terms and conditions (in English) which can be found at http://www.accuweather.com/en/free-weather-widgets/terms and AccuWeather’s Privacy Statement (in English) which can be found at http://www.accuweather.com/en/privacy.
-                                    -->
-                                </a><div id="awcc1452522010263" class="aw-widget-current label"  data-locationkey="167557" data-unit="c" data-language="de" data-useip="false" data-uid="awcc1452522010263"></div><script type="text/javascript" src="http://oap.accuweather.com/launch.js"></script> 
-                            </div> 
-              <script type="text/javascript" src="http://oap.accuweather.com/launch.js"></script> 
-
-        </paper-item-body>
-          <!--paper-icon-button icon="add">+</paper-icon-button-->
-      </paper-toolbar>
-    </paper-drawer-panel>
-
-    <!--  Content starts here-->        
-            <div id="notes">
-
-                    <paper-card class="test" image="./donuts.png" alt="Donuts">
-        <div class="card-content">
-          <div class="cafe-header">Die Studenten waren mal wieder bei IBM
-            <div class="cafe-location cafe-light">
-              <iron-icon icon="communication:location-on"></iron-icon>
-              <span>250ft</span>
-            </div>
-          </div>
-          <div class="cafe-rating">
-            <iron-icon class="star" icon="star"></iron-icon>
-            <iron-icon class="star" icon="star"></iron-icon>
-            <iron-icon class="star" icon="star"></iron-icon>
-            <iron-icon class="star" icon="star"></iron-icon>
-            <iron-icon class="star" icon="star"></iron-icon>
-          </div>
-          <p>$・Italian, Cafe</p>
-          <p class="cafe-light">Small plates, salads &amp; sandwiches in an intimate setting with 12 indoor seats plus patio seating.</p>
-        </div>
-        <div class="card-actions">
-          <p>Tonight's availability</p>
-          <!--div class="horizontal justified">
-            <paper-icon-button icon="icons:event"></paper-icon-button>
-            <paper-button>5:30PM</paper-button>
-            <paper-button>7:30PM</paper-button>
-            <paper-button>9:00PM</paper-button>
-          </div-->
-          <paper-button class="cafe-reserve">Reserve</paper-button>
-        </div>
-      </paper-card>
-
-                
-                <paper-card image="./bus.jpg" alt="Donuts">
-        <div class="card-content">
-          <p class="cafe-light">In der naechsten Stunde fahren folgende Busse :</p>
-       
-                    <div class="vertical justified">
-            <paper-icon-button icon="maps:directions-bus"> FHWS 5:30PM</paper-icon-button>
-           <paper-icon-button icon="maps:directions-bus"> FHWS 8:30PM</paper-icon-button>
-            <paper-icon-button icon="maps:directions-bus"> FHWS 9:30PM</paper-icon-button>
-          </div>
-          <paper-button class="cafe-reserve">Reserve</paper-button>
-        </div>
-      </paper-card>
-
-      <paper-card heading="clean desk" class="lime">
-         Weitere Infos
-         
-    <div class="card-content">
-         <iron-image heading="Favorite trips" src="./warning.jpg" alt="Trip"/>
-        <p>Essen ist eine Großstadt im Zentrum des Ruhrgebiets und der Metropolregion Rhein-Ruhr. Sie ist nach Köln, Düsseldorf und Dortmund die viertgrößte Stadt des Essen ist eine Großstadt im Zentrum des Ruhrgebiets und der Metropolregion Rhein-Ruhr. Sie ist nach Köln, Düsseldorf und Dortmund die viertgrößte Stadt des </p>
-               </div>
-      </paper-card>
-      <paper-card image="./essen.jpg" alt="Donuts" class="amber">
-        <div class="card-content">
-            Menu des Tages <br>
-            Gemuese mit Fleisch<br>
-            Preis: 3,75 Euros
-            Zusatzstoffe: A1, C3, C4, Z
-          
-          </div>
-      </paper-card>
-      <paper-card heading="Yuna tickets on sale 6/24" class="cyan">
-      </paper-card>
-         <paper-card class="dark">
-        <div class="card-content">
-          <p>Groceries:</p>
-          <paper-checkbox>almond milk</paper-checkbox>
-          <paper-checkbox>coconut water</paper-checkbox>
-          <paper-checkbox>cheese</paper-checkbox>
-          <paper-checkbox>green apples</paper-checkbox>
-        </div>
-        <div class="card-actions">
-          <paper-icon-button icon="communication:location-on" style="color:white"></paper-icon-button>
-          <span>Campbell</span>
-        </div>
-      </paper-card>
-         <paper-card class="dark">
-        <div class="card-content">
-          <p>Groceries:</p>
-          <paper-checkbox>almond milk</paper-checkbox>
-          <paper-checkbox>coconut water</paper-checkbox>
-          <paper-checkbox>cheese</paper-checkbox>
-          <paper-checkbox>green apples</paper-checkbox>
-        </div>
-        <div class="card-actions">
-          <paper-icon-button icon="communication:location-on" style="color:white"></paper-icon-button>
-          <span>Campbell</span>
-        </div>
-      </paper-card>
-
-         <paper-card image="./donuts.png" alt="Donuts" class="amber">
-        <div class="card-content">New cafe opened on Valencia St.</div>
-      </paper-card>
-
-         <paper-card image="./donuts.png" alt="Donuts" class="amber">
-        <div class="card-content">New cafe opened on Valencia St.</div>
-      </paper-card>
-
-
-    </div>
-    </template>
-
-        <script>
-          (function() {
-            Polymer({
-              is: 'sample-element',
-              properties: {
-                bgc: {
-                  type: String,
-                  observer: 'bgcChanged'
-                }
-              },
-              ready: function() {
-                var currentTime = Polymer.dom(this.root).querySelector('.time');
-                setTime(currentTime);
-              },
-              toggleClass: function(e) {
-                var helloDiv = Polymer.dom(this.root).querySelector('.hello');
-                $(helloDiv).toggleClass('red');
-              },
-              bgcChanged: function() {
-                var helloDiv = Polymer.dom(this.root).querySelector('.hello');
-                //helloDiv.style.backgroundColor = this.bgc;
+        <body>     
+        <dom-module id="sample-element">
+            <template>
+        <style is="custom-style">
+            paper-card {
+              width: 100%;
+            }
+            .horizontal {
+              @apply(--layout-horizontal);
+            }
+            .justified {
+              @apply(--layout-justified);
+            }
+            .amber {
+              background: var(--paper-amber-900);
+            }
+            .lime {
+              background: var(--paper-lime-500);
+            }
+            .cyan {
+              background: var(--paper-cyan-500);
+            }
+            .dark {
+              background: var(--paper-blue-grey-500);
+            }
+            paper-card.dark, paper-card.amber, paper-card.lime, paper-card.cyan {
+              color: white;
+              --paper-card-header-color: white;
+            }
+            paper-checkbox {
+              display: block;
+              margin-bottom: 4px;
+              --paper-checkbox-label-color: white;
+              --paper-checkbox-unchecked-color: white;
+            }
+            paper-icon-button {
+              color: var(--paper-grey-600);
+            }
+            paper-icon-button.white {
+              color: white !important;
+            }
+            app-toolbar {
+                /* Toolbar is the main header, so give it some color */
+                background-color: #1E88E5;
+                font-family: 'Roboto', Helvetica, sans-serif;
+                color: white;
+                --app-toolbar-font-size: 24px;
               }
-            });
-          })();
-        </script>
+                paper-toolbar paper-progress {
+              --paper-progress-active-color: var(--accent-color);
+            }
+            .spacer {
+              @apply(--layout-flex);
+            }
+          #notes {
+            @apply(--layout-vertical);
+            @apply(--layout-wrap);
+            height: 90%;
+            width: 90%;
+            margin: 15px;
+          }
 
+          #notes > paper-card {
+            box-sizing: border-box;
+            width: 25%;
+            margin: 4px;
+          }
+          #notes > paper-card.test{
+               @apply(--layout-vertical);
+            @apply(--layout-wrap);
+            box-sizing: border-box;
+/*            max-width: 284px;*/
+            margin: 4px;
+            flex: 0 0 auto;
+          }
+                      #notes > paper-card.amber{
+               @apply(--layout-vertical);
+            @apply(--layout-wrap);
+            box-sizing: border-box;
+/*            max-width: 284px;*/
+            margin: 4px;
+            flex: 0 0 auto;
+          }
+
+                     #notes > paper-card.testo{
+               @apply(--layout-vertical);
+            @apply(--layout-wrap);
+            box-sizing: border-box;
+/*            max-width: 284px;*/
+            margin: 4px;
+            flex: 0 0 auto;
+          }
+            .cafe-header { @apply(--paper-font-headline); }
+          .cafe-light { color: var(--paper-grey-600); }
+          .cafe-location {
+            float: right;
+            font-size: 15px;
+            vertical-align: middle;
+          }
+          .cafe-reserve { color: var(--google-blue-500); }
+          iron-icon.star {
+            --iron-icon-width: 16px;
+            --iron-icon-height: 16px;
+            color: var(--paper-amber-500);
+          }
+          iron-icon.star:last-of-type { color: var(--paper-grey-500); }
+        </style>
+
+            <paper-drawer-panel>
+
+        <paper-toolbar>
+          <paper-icon-button icon="menu"></paper-icon-button>
+              <span class="title">Campus TV</span>
+              <paper-icon-item>
+            <!--iron-icon icon="communication:phone" item-icon>
+            </iron-icon-->
+            <paper-item-body one-line>
+              <div class="time">14h54m</div>
+            </paper-item-body>
+          </paper-icon-item>
+              <paper-item-body>
+                      <div class="navbar-header weather">
+                                    <a href="http://www.accuweather.com/de/de/wurzburg/97070/weather-forecast/167557" class="aw-widget-legal">
+                                        <!--
+                                        By accessing and/or using this code snippet, you agree to AccuWeather’s terms and conditions (in English) which can be found at http://www.accuweather.com/en/free-weather-widgets/terms and AccuWeather’s Privacy Statement (in English) which can be found at http://www.accuweather.com/en/privacy.
+                                        -->
+                                    </a><div id="awcc1452522010263" class="aw-widget-current label"  data-locationkey="167557" data-unit="c" data-language="de" data-useip="false" data-uid="awcc1452522010263"></div><script type="text/javascript" src="http://oap.accuweather.com/launch.js"></script> 
+                                </div> 
+                  <script type="text/javascript" src="http://oap.accuweather.com/launch.js"></script> 
+            </paper-item-body>
+            
+          </paper-toolbar>
+        </paper-drawer-panel>
+
+        <!--  Content starts here-->        
+                <div id="notes">
+
+            <paper-card class="test" image="./donuts.png" alt="Donuts">
+            <div class="card-content">
+              <div class="cafe-header">Die Studenten waren mal wieder bei IBM
+                <div class="cafe-location cafe-light">
+                  <iron-icon icon="icons:date-range"></iron-icon>
+                  <span class="day">250ft</span>
+                </div>
+              </div>
+              <p class="cafe-light">Small plates, salads &amp; sandwiches in an intimate setting with 12 indoor seats plus patio seating.</p>
+            </div>
+          </paper-card>
+
+                          <paper-card heading="Yuna tickets on sale 6/24" class="cyan">
+          </paper-card>
+
+
+            <paper-card image="./bus.jpg" alt="Donuts">
+            <div class="card-content">
+              <p class="cafe-light">In der naechsten Stunde fahren folgende Busse :</p>
+                <div class="vertical justified">
+                    <table>
+                    <tr template repeat="{{fruit in fruits}}">
+                    <td>{{fruit}}</td>
+                    </tr>
+                    </table>    
+                <paper-icon-button icon="maps:directions-bus"> FHWS 5:30PM</paper-icon-button>
+                <paper-icon-button icon="maps:directions-bus"> FHWS 8:30PM</paper-icon-button>
+                <paper-icon-button icon="maps:directions-bus"> FHWS 9:30PM</paper-icon-button>
+                </div>
+              <paper-button class="cafe-reserve">Reserve</paper-button>
+            </div>
+          </paper-card>
+
+          <paper-card heading="Weitere Infos" class="lime">
+
+               <iron-image heading="Favorite trips" src="./warning.jpg" alt="Trip"/>
+        <div class="card-content">
+
+            Essen ist eine Großstadt im Zentrum des Ruhrgebiets und der Metropolregion Rhein-Ruhr. Sie ist nach Köln, Düsseldorf und Dortmund die viertgrößte Stadt des Essen ist eine Großstadt im Zentrum des Ruhrgebiets und der Metropolregion Rhein-Ruhr. Sie ist nach Köln, Düsseldorf und Dortmund die viertgrößte Stadt des
+                   </div>
+          </paper-card>
+
+          <paper-card image="./essen.jpg" alt="Donuts" class="amber">
+            <div class="card-content">
+                Menu des Tages <br>
+                Gemuese mit Fleisch<br>
+                Preis: 3,75 Euros
+                Zusatzstoffe: A1, C3, C4, Z
+
+              </div>
+          </paper-card>
+
+             <paper-card class="dark">
+            <div class="card-content">
+              <p>Groceries:</p>
+              <paper-checkbox>almond milk</paper-checkbox>
+              <paper-checkbox>coconut water</paper-checkbox>
+              <paper-checkbox>cheese</paper-checkbox>
+              <paper-checkbox>green apples</paper-checkbox>
+            </div>
+            <div class="card-actions">
+              <paper-icon-button icon="communication:location-on" style="color:white"></paper-icon-button>
+              <span>Campbell</span>
+            </div>
+          </paper-card>
+             <paper-card class="dark">
+            <div class="card-content">
+              <p>Groceries:</p>
+              <paper-checkbox>almond milk</paper-checkbox>
+              <paper-checkbox>coconut water</paper-checkbox>
+              <paper-checkbox>cheese</paper-checkbox>
+              <paper-checkbox>green apples</paper-checkbox>
+            </div>
+            <div class="card-actions">
+              <paper-icon-button icon="communication:location-on" style="color:white"></paper-icon-button>
+              <span>Campbell</span>
+            </div>
+          </paper-card>
+
+             <!--paper-card image="./donuts.png" alt="Donuts" class="amber">
+            <div class="card-content">New cafe opened on Valencia St.</div>
+          </paper-card>
+
+             <paper-card image="./donuts.png" alt="Donuts" class="amber">
+            <div class="card-content">New cafe opened on Valencia St.</div>
+          </paper-card-->
+
+
+        </div>
+        </template>
     </dom-module>
-         <sample-element bgc="blue"></sample-element>
 
-    </body>
-    </html>
+            <script>
+              (function() {
+                Polymer({
+                  is: 'sample-element',
+                  properties: {
+                    bgc: {
+                      type: String,
+                      observer: 'bgcChanged'
+                    },
+                      fruits:{
+                          type: Array,
+                          value: ['orange', 'strawberry', 'banana']
+                      }
+                  },
+                    created: function() {
+                    this.fruits = ['orange', 'strawberry', 'banana'];
+                    },
+                  ready: function() {
+                      //this.fruits = ['orange', 'strawberry', 'banana'];
+                    var currentTime = Polymer.dom(this.root).querySelector('.time');
+                    setTime(currentTime);
+                      var allInfos=[];
+                      allInfos = getFacultyNews();
+                      alert(allInfos.length)
+                    var infoPaper = Polymer.dom(this.root).querySelector('.test');
+                    fillRecentNews(infoPaper,allInfos[0]);
+                  },
+                  toggleClass: function(e) {
+                    var helloDiv = Polymer.dom(this.root).querySelector('.hello');
+                    $(helloDiv).toggleClass('red');
+                  },
+                  bgcChanged: function() {
+                    var helloDiv = Polymer.dom(this.root).querySelector('.hello');
+                    //helloDiv.style.backgroundColor = this.bgc;
+                  }
+                });
+              })();
+            </script>
+
+        </dom-module>
+             <sample-element bgc="blue"></sample-element>
+
+        </body>
+        </html>

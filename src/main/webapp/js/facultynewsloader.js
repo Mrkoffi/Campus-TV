@@ -1,25 +1,31 @@
-  function setTime(element) {
-      
-       setInterval(function () {
-        var currentTime = new Date();
-        var h = currentTime.getHours();
-        var m = currentTime.getMinutes();
-        var s = currentTime.getSeconds();
-        var time = (h > 9 ? h : '0' + h) + " : " + (m > 9 ? m : '0' + m) + " : " + (s > 9 ? s : '0' + s);
-        $(element).text(time);
-    }, 1000);
-}
+/* 
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+$(document).ready(function () {
 
-function getFacultyNews(){
-    
+//$(".mThumbnailScrollers").mThumbnailScroller({
+//              axis:"y" //change to "y" for vertical scroller
+//            });
+
     var resNews = [];
     var prefix = 'http://www.welearn.de/';
 
-    /*function fillList(resNew) {
+    function addRowToContainer(row, container) {
+        container.append(row);
+    }
+    function addNewRow(index, container) {
+        container.append('<div class="row" id="cRow' + index + '"></div>');
+    }
+
+    function fillList(resNew) {
         var rowcounter = 3;
         var simplecounter = -1;
 
         var newsContainer = $("#nContainer");
+//var row='<div class="row" id="cRow"></div>';
+// newsContainer.append(row);
 
         addNewRow(simplecounter, newsContainer);
         var roww = $('#cRow' + simplecounter);
@@ -47,7 +53,7 @@ function getFacultyNews(){
                 roww = $('#cRow' + simplecounter);
             }
         }
-    }*/
+    }
 
     $.ajax({
         url: 'http://www.welearn.de/aktuelles/news.html',
@@ -60,40 +66,35 @@ function getFacultyNews(){
                 var newslink = $(imgtexts).find('a').attr('href');
                 var newsDate = $(this).find("span").text();
                 var newsTitle = $(this).find("strong").text();
-                alert(" date:"+newsDate+"\n title "+newsTitle+"\n text "+newsText+"\n link "+newslink+"\n img "+newsimgs);
                 var myNews = new News(newsTitle, newsDate, newsText, prefix + newsimgs, prefix + newslink);
-                 alert(News.newsTitle);
                 resNews.push(myNews);
             });
-             //fillList(resNews);
-             //fillRecentNews(resNews[resNews.length - 1]);
+             fillList(resNews);
+             fillRecentNews(resNews[resNews.length - 1]);
              //changeInfosInStart(resNews);
         }
     });
-        alert(resNews.length);
-       return resNews;
-}
 
 
 //Changing the news content each second-- so too quick :)
-/*setInterval(function () {
+setInterval(function () {
         fillRecentNews(resNews[Math.floor((Math.random() * resNews.length-1) + 1)]);
-     }, 15000);*/
+     }, 15000);
      
-    function fillRecentNews(news,infoArray) {
+    function fillRecentNews(news) {
+         $('#jumb2').empty();
+        var title = news.title;
+        var date = news.date;
+        var desc = news.desc;
+        var link = news.link;
+        var image = news.image;
         
-        var infos = infoArray;
-        
-         //$(news).empty();
-        var title = infos.title;
-        var date = infos.date;
-        var desc = infos.desc;
-        var image = infos.image;
-        
-        $(news).find(".cafe-header").text(title);  //.each(function(index,a){
-        $(news).find("papaer-card.test").find('image').change(infos.image);  //.each(function(index,a){
-        $(news).find("span.day").text(date);
-        $(news).find(".cafe-light").text(desc);
-        //$(news).find("strong").text();
+        var myDiv = '<a href="' + link + '">' +
+                '<img class="img-responsive" src="' + image + '"  alt="">' +
+                '</a><h3><a href="' + link + '">' + title + '</a></h3><h5><a href="' + link + '">' + date + '</a></h5>' +
+                ' <p>' + desc + '</p>';
+
+        $('#jumb2').append(myDiv);
     }
-    
+
+});

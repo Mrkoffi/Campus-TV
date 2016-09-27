@@ -1,0 +1,198 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 02.02.2016, 09:46:24
+    Author     : Kpokpoya
+*/
+
+html, body {
+    height: 100%;
+    background:#424242;
+    overflow: hidden;
+}
+
+wrapper > .container {
+    background: #616161;
+}
+
+footer {
+    color: #666;
+    background: #222;
+    padding: 17px 0 18px 0;
+    border-top: 1px solid #000;
+}
+footer a {
+    color: #ffe;
+}
+footer a:hover {
+    color: #efefef;
+}
+.wrapper {
+/*    height: auto !important;*/
+    height: 100%;
+    margin: 0 auto -68px;
+    padding: 15px;
+}
+
+
+div.navbar-header.weather{
+    width:100%;
+    margin-top: 3px;
+    height: 68px;
+}
+.aw-current-weather-inner {
+/*    padding: 10px; */
+    /*for compacting all them in the middle display: table;*/
+}
+/* hat h3 Elemente,span,span.aw-weather-description
+   p.aw-temp-time-desc*/
+
+.aw-current-weather-inner ~ span,p{
+    align-content: center;
+}
+.aw-current-weather-inner > p{
+}
+p.aw-temp-time-desc{
+} 
+
+/*.navbar-header {
+    height: 68px;
+}*/
+.row  .col-sm-4{
+/*    height: 68px;*/
+}
+div#myheader{
+    background: #424242 !important;
+    margin:0 5px 0 5px;
+    margin-right: 5px;
+    margin-left: 5px;
+    color: #FFF;
+}
+#titleholder,#timeholder{
+    text-align: center;
+    font-size: 20px;
+    font-family:  "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
+#timeholder{
+    -webkit-animation: mymove 5s infinite; /* Chrome, Safari, Opera */
+    animation: mymove 5s infinite;
+}
+/* Chrome, Safari, Opera */
+@-webkit-keyframes mymove {
+    from {background-color: #5D4037;}
+    to {background-color: #616161;}
+}
+
+/* Standard syntax */
+@keyframes mymove {
+    from {background-color: #5D4037;}
+    to {background-color: #616161;}
+}
+.push{
+    min-height: 100%;
+    box-sizing:border-box;
+}
+div#sContainer{
+   height: 100%;
+    margin-top: 30px;
+}
+#sContainer > .row {
+       height: 100%;
+}
+div.row .col-lg-5,div.row .col-lg-2{
+    height: 90%
+}
+div.row  .jumbotron{
+    padding: 10px;
+    height: 45%;
+    overflow: scroll;
+    font-size: 30px;
+}
+#jumb1,#jumb3,#jumb2,#jumb4{
+    /*     padding: 10px;*/
+}
+#jumb2 a,#jumb2 p{
+    color:#000;
+    font-size: 30px;
+}
+
+.badge{
+    font-size: 30px;
+    background: #F9A825;
+}
+.jumbotron h3{
+    background: #F9A825;/*#BDBDBD #FFE082*/
+    border-radius: 4px;
+    text-align: center;
+    margin: 0;
+    padding: 10px;
+    font-size: 30px;
+}
+.jumbotron > div.container{
+    padding: 10px;
+    margin-bottom: 5px;
+    border-bottom: solid #FFF;
+}
+
+#menuholder{
+    position: relative;
+    padding: 0;
+}
+div.btn-group-vertical{
+    width: 100%;
+    height: 100%;
+    margin-top: 10px;
+}
+.btn-group-vertical .btn{
+    margin-bottom: 50px;
+    height: 10%;
+    background: #F9A825;
+    border-radius: 10px;
+    font-size: 30px;
+}
+.btn-group-vertical>.btn:first-child:not(:last-child) {
+    border-radius: 10px;
+    color: #FFF;
+}
+.btn-group-vertical>.btn:first-child:not(:last-child):hover , 
+.btn-group-vertical>.btn:last-child:not(:first-child):hover,
+.btn-group-vertical>.btn:not(:first-child):not(:last-child):hover
+{
+    background: #FFE082 !important;
+}
+.btn-group-vertical>.btn:first-child:not(:last-child)> a , 
+.btn-group-vertical>.btn:last-child:not(:first-child)>a,
+.btn-group-vertical>.btn:not(:first-child):not(:last-child)>a
+{
+    color:#FFF;
+    text-decoration: none;
+}
+.btn-group-vertical>.btn:last-child:not(:first-child) {
+    border-radius: 10px;
+    color: #FFF;
+}
+.btn-group-vertical>.btn:not(:first-child):not(:last-child){
+    border-radius: 10px;
+    color: #FFF;
+}
+div#somediv iframe{
+    width: 100%;
+    height: 100%;
+/*    margin: 0 0 0;*/
+}
+div#somediv {
+    width: 90%;
+    height: 90%;
+    overflow: hidden;
+
+}
+
+.ui-dialog,.ui-dialog,.ui-widget, .ui-widget-content{
+    background: #424242 !important;
+}?
+.ui-corner-all,.foo, .ui-draggable, .ui-resizable{
+     background: #424242 !important;
+}
