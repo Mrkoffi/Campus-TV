@@ -62,7 +62,7 @@ function getFacultyNews(){
                 var newsTitle = $(this).find("strong").text();
                 alert(" date:"+newsDate+"\n title "+newsTitle+"\n text "+newsText+"\n link "+newslink+"\n img "+newsimgs);
                 var myNews = new News(newsTitle, newsDate, newsText, prefix + newsimgs, prefix + newslink);
-                 alert(News.newsTitle);
+                alert(myNews.text);
                 resNews.push(myNews);
             });
              //fillList(resNews);

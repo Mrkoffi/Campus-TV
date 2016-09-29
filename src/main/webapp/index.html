@@ -16,9 +16,10 @@
           <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
 
             <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
-            <script type="text/javascript" src="./js/utils.js"></script>
+
             <script type="text/javascript" src="./js/model.js"></script>
             <script type="text/javascript" src="./js/crossdomain.js"></script>
+            <script type="text/javascript" src="./js/utils.js"></script>
 
              <link rel="stylesheet" href="css/firstcss.css">
             <link rel="stylesheet" href="css/newcss.css">
@@ -26,7 +27,7 @@
              <link rel="stylesheet" href="css/bootstrap-theme.min.css">
              <link rel="stylesheet" href="css/bootstrap.css">
              <link rel="stylesheet" href="css/bootstrap.min.css">
-        <script type="text/javascript" src="http://oap.accuweather.com/launch.js"></script>
+       		 <script type="text/javascript" src="http://oap.accuweather.com/launch.js"></script>
 
             <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" />
           <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
@@ -298,11 +299,12 @@
                       //this.fruits = ['orange', 'strawberry', 'banana'];
                     var currentTime = Polymer.dom(this.root).querySelector('.time');
                     setTime(currentTime);
+                    
                       var allInfos=[];
                       allInfos = getFacultyNews();
-                      alert(allInfos.length)
-                    var infoPaper = Polymer.dom(this.root).querySelector('.test');
-                    fillRecentNews(infoPaper,allInfos[0]);
+                      alert("Length: "+allInfos.length)
+                    /*var infoPaper = Polymer.dom(this.root).querySelector('.test');
+                    fillRecentNews(infoPaper,allInfos[0]);*/
                   },
                   toggleClass: function(e) {
                     var helloDiv = Polymer.dom(this.root).querySelector('.hello');
