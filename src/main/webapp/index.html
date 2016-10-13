@@ -15,8 +15,9 @@
           <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
           <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
 
-            <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
-
+            <!--script src="https://code.jquery.com/jquery-2.1.4.js"></script-->
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+            <!--script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script-->
             <script type="text/javascript" src="./js/model.js"></script>
             <script type="text/javascript" src="./js/crossdomain.js"></script>
             <script type="text/javascript" src="./js/utils.js"></script>
@@ -34,10 +35,10 @@
           <link rel="import" href="bower_components/iron-demo-helpers/demo-snippet.html">
           <link rel="import" href="bower_components/iron-demo-helpers/demo-pages-shared-styles.html">
           <link rel="import" href="bower_components/iron-collapse/iron-collapse.html">
-          <link rel="import" href="bower_components/iron-icons/iron-icons.html">
           <link rel="import" href="bower_components/iron-icons/communication-icons.html">
           <link rel="import" href="bower_components/iron-icons/hardware-icons.html">
           <link rel="import" href="bower_components/iron-icons/social-icons.html">
+          <link rel="import" href="bower_components/iron-icons/iron-icons.html">
           <link rel="import" href="bower_components/iron-flex-layout/iron-flex-layout.html">
           <link rel="import" href="bower_components/paper-button/paper-button.html">
           <link rel="import" href="bower_components/paper-checkbox/paper-checkbox.html">
@@ -124,8 +125,16 @@
             margin: 4px;
             flex: 0 0 auto;
           }
-                      #notes > paper-card.amber{
-               @apply(--layout-vertical);
+          paper-card.test{
+              --paper-card-header-image:{
+              image-url:"./cafe.jpg";
+              height:300px;
+              object-fit: cover;
+           };
+           --paper-card-header-color: #ff0000;
+          }
+           #notes > paper-card.amber{
+            @apply(--layout-vertical);
             @apply(--layout-wrap);
             box-sizing: border-box;
 /*            max-width: 284px;*/
@@ -133,8 +142,8 @@
             flex: 0 0 auto;
           }
 
-                     #notes > paper-card.testo{
-               @apply(--layout-vertical);
+          #notes > paper-card.testo{
+            @apply(--layout-vertical);
             @apply(--layout-wrap);
             box-sizing: border-box;
 /*            max-width: 284px;*/
@@ -143,6 +152,7 @@
           }
             .cafe-header { @apply(--paper-font-headline); }
           .cafe-light { color: var(--paper-grey-600); }
+          .cafe-lighting { color: var(--paper-grey-400); }
           .cafe-location {
             float: right;
             font-size: 15px;
@@ -186,19 +196,19 @@
         <!--  Content starts here-->        
                 <div id="notes">
 
-            <paper-card class="test" image="./donuts.png" alt="Donuts">
+            <paper-card class="test"  alt="Donuts">
             <div class="card-content">
               <div class="cafe-header">Die Studenten waren mal wieder bei IBM
-                <div class="cafe-location cafe-light">
-                  <iron-icon icon="icons:date-range"></iron-icon>
-                  <span class="day">250ft</span>
-                </div>
               </div>
+                <div class="cafe-location cafe-lighting">
+                  <iron-icon icon="icons:today"></iron-icon>
+                  <span class="infoDay">250ft</span>
+                </div>
               <p class="cafe-light">Small plates, salads &amp; sandwiches in an intimate setting with 12 indoor seats plus patio seating.</p>
             </div>
           </paper-card>
 
-                          <paper-card heading="Yuna tickets on sale 6/24" class="cyan">
+          <paper-card heading="Yuna tickets on sale 6/24" class="cyan">
           </paper-card>
 
 
@@ -251,6 +261,7 @@
               <span>Campbell</span>
             </div>
           </paper-card>
+
              <paper-card class="dark">
             <div class="card-content">
               <p>Groceries:</p>
@@ -293,6 +304,7 @@
                       }
                   },
                     created: function() {
+                    //setFacultyNews();
                     this.fruits = ['orange', 'strawberry', 'banana'];
                     },
                   ready: function() {
@@ -300,11 +312,10 @@
                     var currentTime = Polymer.dom(this.root).querySelector('.time');
                     setTime(currentTime);
                     
-                      var allInfos=[];
-                      allInfos = getFacultyNews();
-                      alert("Length: "+allInfos.length)
-                    /*var infoPaper = Polymer.dom(this.root).querySelector('.test');
-                    fillRecentNews(infoPaper,allInfos[0]);*/
+                    var infoPaper = Polymer.dom(this.root).querySelector('.test');
+                    //infoPaper.image = "http://www.welearn.de/typo3temp/_processed_/csm_iwinet_logo2013_01_dd178a054e.png";
+                    setFacultyNews();
+                    //fillRecentNews(infoPaper);
                   },
                   toggleClass: function(e) {
                     var helloDiv = Polymer.dom(this.root).querySelector('.hello');

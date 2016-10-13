@@ -1,3 +1,42 @@
+
+var resNews = [];
+var resN = [];
+var prefix = 'http://www.welearn.de/';
+
+function doAjax(callback) {
+
+    // NOTE:  This function must return the value 
+    //        from calling the $.ajax() method.
+   //var resNews = [];
+         $.ajax({
+        url: 'http://www.welearn.de/aktuelles/news.html',
+        type: 'GET',
+        success: function (res) {
+            $(res.responseText).find('li.fiwnews').each(function (item) {
+                var newsText = $(this).find("div.news_block").text();  //.each(function(index,a){
+                var imgtexts = $(this).find("div.fiwnews_img");  //.each(function(index,a){
+                var newsimgs = $(imgtexts).find('img').attr('src');
+                var newslink = $(imgtexts).find('a').attr('href');
+                var newsDate = $(this).find("span").text();
+                var newsTitle = $(this).find("strong").text();
+                //alert(" date:"+newsDate+"\n title "+newsTitle+"\n text "+newsText+"\n link "+newslink+"\n img "+newsimgs);
+                var myNews = new News(newsTitle, newsDate, newsText, prefix + newsimgs, prefix + newslink);
+                alert(myNews.date);
+                resNews.push(myNews);
+                //resNews.push(newsDate+";"+newsTitle+";"+newsText+";"+newslink+";"+newsimgs);
+            });
+                //alert("Length af:"+resNews.length);
+        },
+        complete: function(){
+            fillRecentNews($(".test"));
+            callback(true);
+        },
+        fail: function(){
+            callback(false);
+        }
+    });
+}
+
   function setTime(element) {
       
        setInterval(function () {
@@ -10,90 +49,40 @@
     }, 1000);
 }
 
-function getFacultyNews(){
-    
-    var resNews = [];
-    var prefix = 'http://www.welearn.de/';
-
-    /*function fillList(resNew) {
-        var rowcounter = 3;
-        var simplecounter = -1;
-
-        var newsContainer = $("#nContainer");
-
-        addNewRow(simplecounter, newsContainer);
-        var roww = $('#cRow' + simplecounter);
-        for (var i = 0; i < resNews.length; i++) {
-            //alert(i);
-            var title = resNew[i].title;
-            var date = resNew[i].date;
-            var desc = resNew[i].desc;
-            var link = resNew[i].link;
-            var image = resNew[i].image;
-
-            var myDiv = '<div class="col-md-4 col-lg-4 portfolio-item" id="divN' + i + '"><a href="' + link + '">' +
-                    '<img class="img-responsive" src="' + image + '" id="imageN' + i + '" alt="">' +
-                    '</a><h3><a href="' + link + '">' + title + '</a></h3><h5><a href="' + link + '">' + date + '</a></h5>' +
-                    ' <p>' + desc + '</p></div>';
-
-            $(roww).append(myDiv);
-            //alert(row);
-            if (i === (rowcounter - 1)) {
-                //newsContainer.append(row);
-                addRowToContainer(roww, newsContainer);
-                rowcounter += 3;
-                simplecounter++;
-                addNewRow(simplecounter, newsContainer);
-                roww = $('#cRow' + simplecounter);
-            }
-        }
-    }*/
-
-    $.ajax({
-        url: 'http://www.welearn.de/aktuelles/news.html',
-        type: 'GET',
-        success: function (res) {
-            $(res.responseText).find('li.fiwnews').each(function (item) {
-                var newsText = $(this).find("div.news_block").text();  //.each(function(index,a){
-                var imgtexts = $(this).find("div.fiwnews_img");  //.each(function(index,a){
-                var newsimgs = $(imgtexts).find('img').attr('src');
-                var newslink = $(imgtexts).find('a').attr('href');
-                var newsDate = $(this).find("span").text();
-                var newsTitle = $(this).find("strong").text();
-                alert(" date:"+newsDate+"\n title "+newsTitle+"\n text "+newsText+"\n link "+newslink+"\n img "+newsimgs);
-                var myNews = new News(newsTitle, newsDate, newsText, prefix + newsimgs, prefix + newslink);
-                alert(myNews.text);
-                resNews.push(myNews);
-            });
-             //fillList(resNews);
-             //fillRecentNews(resNews[resNews.length - 1]);
-             //changeInfosInStart(resNews);
-        }
-    });
-        alert(resNews.length);
-       return resNews;
+function setFacultyNews(){
+     doAjax(function(result){
+    if (result == true ){
+           alert("Length after succes set reN :"+ resNews.length);
+    }
+    else
+       alert("Length after failed reN :");
+  });
 }
 
 
 //Changing the news content each second-- so too quick :)
 /*setInterval(function () {
         fillRecentNews(resNews[Math.floor((Math.random() * resNews.length-1) + 1)]);
-     }, 15000);*/
+     }, 15000);*/ 
      
-    function fillRecentNews(news,infoArray) {
-        
-        var infos = infoArray;
-        
+    function fillRecentNews(news) {
+
+        var infos = resNews[0];
+        alert("in fillRecentNews title: " + infos.title)
          //$(news).empty();
+
         var title = infos.title;
         var date = infos.date;
         var desc = infos.desc;
         var image = infos.image;
+
+        alert("Image "+ image);
+        console.log(image);
         
-        $(news).find(".cafe-header").text(title);  //.each(function(index,a){
-        $(news).find("papaer-card.test").find('image').change(infos.image);  //.each(function(index,a){
-        $(news).find("span.day").text(date);
+        $(news).find(".cafe-header").text(title); 
+        //news.image=image 
+         //news.image=image;
+        $(news).find(".infoDay").text(date);
         $(news).find(".cafe-light").text(desc);
-        //$(news).find("strong").text();
     }
     
