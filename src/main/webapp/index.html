@@ -14,10 +14,7 @@
           <meta charset="utf-8">
           <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
           <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
-
-            <!--script src="https://code.jquery.com/jquery-2.1.4.js"></script-->
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-            <!--script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script-->
             <script type="text/javascript" src="./js/model.js"></script>
             <script type="text/javascript" src="./js/crossdomain.js"></script>
             <script type="text/javascript" src="./js/utils.js"></script>
@@ -28,17 +25,14 @@
              <link rel="stylesheet" href="css/bootstrap-theme.min.css">
              <link rel="stylesheet" href="css/bootstrap.css">
              <link rel="stylesheet" href="css/bootstrap.min.css">
-       		 <script type="text/javascript" src="http://oap.accuweather.com/launch.js"></script>
+       		   <script type="text/javascript" src="http://oap.accuweather.com/launch.js"></script>
 
             <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" />
           <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
           <link rel="import" href="bower_components/iron-demo-helpers/demo-snippet.html">
           <link rel="import" href="bower_components/iron-demo-helpers/demo-pages-shared-styles.html">
           <link rel="import" href="bower_components/iron-collapse/iron-collapse.html">
-          <link rel="import" href="bower_components/iron-icons/communication-icons.html">
-          <link rel="import" href="bower_components/iron-icons/hardware-icons.html">
-          <link rel="import" href="bower_components/iron-icons/social-icons.html">
-          <link rel="import" href="bower_components/iron-icons/iron-icons.html">
+          <!--link rel="import" href="bower_components/iron-icons/iron-icons.html"-->
           <link rel="import" href="bower_components/iron-flex-layout/iron-flex-layout.html">
           <link rel="import" href="bower_components/paper-button/paper-button.html">
           <link rel="import" href="bower_components/paper-checkbox/paper-checkbox.html">
@@ -74,6 +68,9 @@
             }
             .dark {
               background: var(--paper-blue-grey-500);
+            }
+            .departures{
+               background: var(--paper-indigo);
             }
             paper-card.dark, paper-card.amber, paper-card.lime, paper-card.cyan {
               color: white;
@@ -116,6 +113,7 @@
             box-sizing: border-box;
             width: 25%;
             margin: 4px;
+            flex;
           }
           #notes > paper-card.test{
                @apply(--layout-vertical);
@@ -150,7 +148,8 @@
             margin: 4px;
             flex: 0 0 auto;
           }
-            .cafe-header { @apply(--paper-font-headline); }
+          .cafe-header div{ @apply(--paper-font-headline); }
+          .card-content{@apply(--paper-font-headline);}
           .cafe-light { color: var(--paper-grey-600); }
           .cafe-lighting { color: var(--paper-grey-400); }
           .cafe-location {
@@ -158,6 +157,19 @@
             font-size: 15px;
             vertical-align: middle;
           }
+          /*.cafe-header-meat paper-icon-item{
+             float: right;
+             display: inline-block;
+          }*/
+          .meat-left {
+             float: left;
+             width: : 70%;
+           }
+            .cafe-right {
+             float: right;
+             width: : 30%;
+           }
+
           .cafe-reserve { color: var(--google-blue-500); }
           iron-icon.star {
             --iron-icon-width: 16px;
@@ -173,8 +185,6 @@
           <paper-icon-button icon="menu"></paper-icon-button>
               <span class="title">Campus TV</span>
               <paper-icon-item>
-            <!--iron-icon icon="communication:phone" item-icon>
-            </iron-icon-->
             <paper-item-body one-line>
               <div class="time">14h54m</div>
             </paper-item-body>
@@ -196,7 +206,7 @@
         <!--  Content starts here-->        
                 <div id="notes">
 
-            <paper-card class="test"  alt="Donuts">
+            <paper-card class="test" image = "./bus.jpg" alt="Donuts">
             <div class="card-content">
               <div class="cafe-header">Die Studenten waren mal wieder bei IBM
               </div>
@@ -208,47 +218,115 @@
             </div>
           </paper-card>
 
-          <paper-card heading="Yuna tickets on sale 6/24" class="cyan">
-          </paper-card>
-
-
-            <paper-card image="./bus.jpg" alt="Donuts">
+          <paper-card heading="Wichtige Meldungen der Fakultät" class="cyan faknews">
+                
+               <!--iron-image heading="Favorite trips" src="./warning.jpg" alt="Trip"/-->
             <div class="card-content">
-              <p class="cafe-light">In der naechsten Stunde fahren folgende Busse :</p>
-                <div class="vertical justified">
-                    <table>
-                    <tr template repeat="{{fruit in fruits}}">
-                    <td>{{fruit}}</td>
-                    </tr>
-                    </table>    
-                <paper-icon-button icon="maps:directions-bus"> FHWS 5:30PM</paper-icon-button>
-                <paper-icon-button icon="maps:directions-bus"> FHWS 8:30PM</paper-icon-button>
-                <paper-icon-button icon="maps:directions-bus"> FHWS 9:30PM</paper-icon-button>
-                </div>
-              <paper-button class="cafe-reserve">Reserve</paper-button>
+            <div class="titleNews"></div>
+            <div class="dateNews">07.11.2016</div>
+            <p class="fakNewsBody">Essen ist eine Großstadt im Zentrum des Ruhrgebiets und der Metropolregion Rhein-Ruhr. Sie ist nach Köln, Düsseldorf und Dortmund die viertgrößte Stadt des Essen ist eine Großstadt im Zentrum des Ruhrgebiets und der Metropolregion Rhein-Ruhr. Sie ist nach Köln, Düsseldorf und Dortmund die viertgrößte Stadt des
+            </p>
             </div>
           </paper-card>
 
-          <paper-card heading="Weitere Infos" class="lime">
 
-               <iron-image heading="Favorite trips" src="./warning.jpg" alt="Trip"/>
-        <div class="card-content">
-
-            Essen ist eine Großstadt im Zentrum des Ruhrgebiets und der Metropolregion Rhein-Ruhr. Sie ist nach Köln, Düsseldorf und Dortmund die viertgrößte Stadt des Essen ist eine Großstadt im Zentrum des Ruhrgebiets und der Metropolregion Rhein-Ruhr. Sie ist nach Köln, Düsseldorf und Dortmund die viertgrößte Stadt des
-                   </div>
-          </paper-card>
-
-          <paper-card image="./essen.jpg" alt="Donuts" class="amber">
+            <paper-card image="./bus.jpg" alt="Donuts" class="departures">
             <div class="card-content">
-                Menu des Tages <br>
-                Gemuese mit Fleisch<br>
-                Preis: 3,75 Euros
-                Zusatzstoffe: A1, C3, C4, Z
+              <paper-card-heading>In der naechsten Stunde fahren folgende Busse </paper-card-heading>
+              <div class="card-actions">
+                    <paper-icon-item><iron-icon icon="icons:swap-vertical-circle" item-icon></iron-icon>Bus 214</paper-icon-item>
+                   <div class="horizontal justified"> 
+                     <paper-icon-item> <iron-icon icon="icons:icons:flight-takeoff"></iron-icon>FHWS</paper-icon-button>
+                     <paper-icon-item> <iron-icon icon="icons:flight-land"></iron-icon>Würzburg Busbahnhof</paper-icon-button>
+                   </div>
+                   <div class="horizontal-justified">
+                     <paper-icon-item>
+                      <iron-icon icon="icons:swap-vert" item-icon>
+                      </iron-icon>
+                        <paper-item-body two-line>
+                          <div>09:11</div>
+                          <div secondary>09:30</div>
+                        </paper-item-body>
+                      </paper-icon-item>
+
+                   </div>
+              </div>
+               <div class="card-actions">
+                    <paper-icon-item><iron-icon icon="icons:swap-vertical-circle" item-icon></iron-icon>Bus 114</paper-icon-item>
+                   <div class="horizontal justified"> 
+                     <paper-icon-item> <iron-icon icon="icons:icons:flight-takeoff"></iron-icon>FHWS</paper-icon-button>
+                     <paper-icon-item> <iron-icon icon="icons:flight-land"></iron-icon>Würzburg Busbahnhof</paper-icon-button>
+                   </div>
+
+                   <div class="horizontal-justified">
+                     <paper-icon-item>
+                      <iron-icon icon="icons:swap-vert" item-icon>
+                      </iron-icon>
+                        <paper-item-body two-line>
+                          <div>09:15</div>
+                          <div secondary>09:30</div>
+                        </paper-item-body>
+                      </paper-icon-item>
 
               </div>
+               </div>
+               <div class="card-actions"> 
+                    <paper-icon-item><iron-icon icon="icons:swap-vertical-circle" item-icon></iron-icon>Bus 10</paper-icon-item>
+                   <div class="horizontal justified"> 
+                     <paper-icon-item> <iron-icon icon="icons:icons:flight-takeoff"></iron-icon>FHWS</paper-icon-button>
+                     <paper-icon-item> <iron-icon icon="icons:flight-land"></iron-icon>Würzburg Busbahnhof</paper-icon-button>
+                   </div>
+
+                   <div class="horizontal-justified">
+                     <paper-icon-item>
+                      <iron-icon icon="icons:swap-vert" item-icon>
+                      </iron-icon>
+                        <paper-item-body two-line>
+                          <div>09:11</div>
+                          <div secondary>09:18</div>
+                        </paper-item-body>
+                      </paper-icon-item>
+                    </div>
+              <!--paper-button class="cafe-reserve">Reserve</paper-button-->
+            </div>
+            </div>
           </paper-card>
 
-             <paper-card class="dark">
+          
+          <paper-card heading="Yuna tickets on sale 6/24" class="lime">
+          </paper-card>
+
+          <paper-card heading="Mensateria" image="./essen.jpg" alt="Donuts" class="amber meals">
+
+               <div class="card-content">
+                  <div class="cafe-header card-actions">
+                  <div>
+                        <img class="meat-icon" style="margin-right: 5px;" src="./icons/gefluegel.jpg"></img>
+                        <span class="meat-title">Gemuese mit Fleisch</span>
+                  </div>
+                       <paper-icon-item>
+                          <iron-icon icon="shopping-cart"  style="margin-right: 5px;" item-icon></iron-icon>
+                          <span class="meat-price">3,75 </span>
+                      </paper-icon-item>
+                  </div>
+
+                  <!--iron-list is="dom-repeat" items="[[data]]" as="item" scroll-target="html">
+                  <template>
+                    <div class="cafe-header card-actions">
+                        <span class="meat-title">[[item.name]]</span>
+                       <paper-icon-item class="cafe-right">
+                          <iron-icon icon="shopping-cart" item-icon></iron-icon>
+                          <span class="meat-price">[[item.price]] </span>
+                      </paper-icon-item>
+                  </div>
+                  </template>
+                   </iron-list-->
+
+                 </div> 
+
+          </paper-card>
+
+             <!--paper-card class="dark">
             <div class="card-content">
               <p>Groceries:</p>
               <paper-checkbox>almond milk</paper-checkbox>
@@ -260,30 +338,13 @@
               <paper-icon-button icon="communication:location-on" style="color:white"></paper-icon-button>
               <span>Campbell</span>
             </div>
-          </paper-card>
-
-             <paper-card class="dark">
-            <div class="card-content">
-              <p>Groceries:</p>
-              <paper-checkbox>almond milk</paper-checkbox>
-              <paper-checkbox>coconut water</paper-checkbox>
-              <paper-checkbox>cheese</paper-checkbox>
-              <paper-checkbox>green apples</paper-checkbox>
-            </div>
-            <div class="card-actions">
-              <paper-icon-button icon="communication:location-on" style="color:white"></paper-icon-button>
-              <span>Campbell</span>
-            </div>
-          </paper-card>
-
-             <!--paper-card image="./donuts.png" alt="Donuts" class="amber">
-            <div class="card-content">New cafe opened on Valencia St.</div>
-          </paper-card>
-
-             <paper-card image="./donuts.png" alt="Donuts" class="amber">
-            <div class="card-content">New cafe opened on Valencia St.</div>
           </paper-card-->
 
+          <paper-card heading="Mensa am Hubland" image="./essen.jpg" alt="Donuts" class="dark mealshub">
+
+               <div class="card-content">
+                 </div>
+          </paper-card>
 
         </div>
         </template>
@@ -298,24 +359,30 @@
                       type: String,
                       observer: 'bgcChanged'
                     },
-                      fruits:{
-                          type: Array,
-                          value: ['orange', 'strawberry', 'banana']
+                      data:{
+                          type: Array
                       }
                   },
                     created: function() {
-                    //setFacultyNews();
-                    this.fruits = ['orange', 'strawberry', 'banana'];
+                    //this.data = ['orange', 'strawberry', 'banana'];
                     },
                   ready: function() {
-                      //this.fruits = ['orange', 'strawberry', 'banana'];
                     var currentTime = Polymer.dom(this.root).querySelector('.time');
                     setTime(currentTime);
                     
                     var infoPaper = Polymer.dom(this.root).querySelector('.test');
+                    var infoMealMensateria = Polymer.dom(this.root).querySelector('.amber.meals');
+                    var infoMealHub = Polymer.dom(this.root).querySelector('.dark.mealshub');
+                    var infoFakNews = Polymer.dom(this.root).querySelector('.cyan.faknews');
                     //infoPaper.image = "http://www.welearn.de/typo3temp/_processed_/csm_iwinet_logo2013_01_dd178a054e.png";
-                    setFacultyNews();
-                    //fillRecentNews(infoPaper);
+                    setFacultyNews(infoPaper);
+                    setMealsMensateria(infoMealMensateria);
+                     //this.data = setMealsMensateria(infoMealMensateria);
+                    setMealsHubland(infoMealHub);
+                    setFakNews(infoFakNews);
+                    //writeBus();
+                    Polymer.updateStyles();
+
                   },
                   toggleClass: function(e) {
                     var helloDiv = Polymer.dom(this.root).querySelector('.hello');
