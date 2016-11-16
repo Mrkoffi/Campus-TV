@@ -3,6 +3,8 @@
     var resMealsMensateria = [];
     var resMealsHubland = [];
     var resFakNews = [];
+    var resBusArray= [];
+    var resEvent= [];
     var prefix = 'http://www.welearn.de/';
     var imageLink = "";
     var bus214 = [];
@@ -103,6 +105,53 @@
         });
     }
 
+     function doAjaxBus(callback) {
+
+            $.ajax({
+            url: 'https://apistaging.fiw.fhws.de/pu/api/departures',
+            type: 'GET',
+            dataType: "json",
+            headers:{
+                "Accept": "application/vnd.fhws-departure.departview+json"
+            },
+            success: function (res) {
+                    $.each(res, function(index, element) {
+                      resBusArray.push(element);
+                    });
+                    //alert("Longueur apres get:" + resBusArray.length);
+            },
+            complete: function(){
+                callback(true);
+            },
+            fail: function(){
+                callback(false);
+            }
+        });
+    }
+     function doAjaxEvents(callback) {
+             $.ajax({
+            url: 'https://apistaging.fiw.fhws.de/mo/api/events/today',
+            type: 'GET',
+            dataType: "json",
+            headers:{
+                "Accept": "application/vnd.fhws-event.eventview+json"
+            },
+            success: function (res) {
+
+                   $.each(res, function(index, element) {
+                      resEvent.push(element);
+                    });
+                alert("After real events"+resEvent.length)
+            },
+            complete: function(){
+                callback(true);
+            },
+            fail: function(){
+                callback(false);
+            }
+        });
+    }
+
 
       function setTime(element) {
           
@@ -121,9 +170,9 @@
             if (result == true ){
                    //alert("Length after succes set reN :"+ resNews.length);
                    fillRecentNews(element, resNews[0]);
-                    // setInterval(function () {
-                    //    fillRecentNews(element,resNews[Math.floor((Math.random() * resNews.length-1) + 1)]);
-                    // }, 15000);
+                     setInterval(function () {
+                       fillRecentNews(element,resNews[Math.floor((Math.random() * resNews.length-1) + 1)]);
+                     }, 15000);
             }
             else
                alert("Length after failed reN :");
@@ -147,7 +196,6 @@
           function setMealsHubland(element){
              doAjaxMealsHubland(function(result){
                 if (result == true ){
-                   //alert("Hat geklappt auch mit Essen am Hubland");
                    fillMeals(element, resMealsHubland);
                    // setInterval(function () {
                    //      fillMeals(element, resMealsHubland[0]);
@@ -165,10 +213,55 @@
                    // setInterval(function () {
                    //      fillFakNews(element, resFakNews[0]);
                    //  }, 15000);
-                }
-                else alert("Length after failed reN :");
+                } else alert("Length after failed reN :");
             });
         }
+
+        function setBusArray(element){
+
+                 doAjaxBus(function(result){
+                    if (result == true ){
+                        var bussi = [];
+                        bussi.push(resBusArray[0]);
+                        bussi.push(resBusArray[1]);
+                        bussi.push(resBusArray[2]);
+                        fillBus(element,bussi);
+                    }
+                    else alert("Length after failed reN :");
+                  });
+       }
+
+       function setEvents(element){
+
+                 doAjaxEvents(function(result){
+                    if (result == true ){
+                        //fillEvents(element,resEvent);
+                        //var bussi = [];
+                        //alert("Before filter "+ resEvent.length);
+                        //  $.each(resEvent, function(index, element) {
+                        //      var currentTime = new Date();
+                        //     var h = currentTime.getHours();
+                        //     var m = currentTime.getMinutes();
+
+                        //     var heures = parseInt(element.startTime.substring(11, element.scheduled.length-6));
+                        //     if(h <= heures)
+                        //          bussi.push(element);
+
+                        //     });
+                        
+                         var newArray=[];
+                         newArray.push(resEvent[0]);
+                         newArray.push(resEvent[1]);
+                         newArray.push(resEvent[2]);
+                         newArray.push(resEvent[3]);
+                         newArray.push(resEvent[4]);
+
+                         fillEvents(element,newArray);
+                    } else alert("Length after failed reN :");
+                  });
+       }
+       
+
 
 
     //Changing the news content each second-- so too quick :)
@@ -177,22 +270,6 @@
          }, 15000);*/ 
          
         function fillMeals(news,arrayElement) {
-
-            //var meal = arrayElement;  
-
-            
-            //alert("in fillMeals title: " + meal.name);
-            //$(news).find("span.meat-title").text(meal.name);
-            //alert("foodtype: "+ decodeFoodType(meal.foodtype));
-            //$(news).find(".meat-icon").attr('src',decodeFoodType(meal.foodtype));
-            //$(news).find("div.meal-date").text(convertStampToDate(meal.tstamp));
-            //$(news).find(".meat-price").text(meal.price + "€");
-            //$(news).find(".bed").attr("on-click",alert("yes button"));
-            //$(news).find(".bed").attr("on-click",  $(news).find("div.meat-price").text(meal.pricebed));
-            // $(news).find(".allergene").text("");
-            // $.each(meal.additivenumbers.split(','), function(index, element) {
-            //      $(news).find(".allergene").append("<paper-button>"+decodeAdditive(element)+"</paper-button>");
-            // });
 
             $.each(arrayElement, function(index, element) {
                  $(news).find(".card-content").append('<div class="cafe-header card-actions">'+
@@ -223,18 +300,45 @@
             $(news).find(".infoDay").text(date);
             $(news).find(".cafe-light").text(desc);
         }
+
          function fillFakNews(news,arrayElement) {
 
                     var infos = arrayElement;
-                    //alert("in fFakNews title: " + infos.title);
                     var title = infos.title;
                     var date = infos.duedate;
                     var desc = infos.description;
-                    //alert("Image "+ image);
                     $(news).find(".titleNews").text(title); 
-                    $(news).find(".dateNews").text(date);
+                    $(news).find(".dateNews").text(date.substring(0, 10));
                     $(news).find(".fakNewsBody").text(desc);
-                }
+        }
+
+        function fillBus(news,arrayElement) {
+              $(news).find(".card-content").empty();
+            $.each(arrayElement, function(index, element) {
+                 $(news).find(".card-content").append('<div class="horizontal justified">'+ 
+                     '<paper-icon-item>'+ element.stopName +'</paper-icon-item>'+
+                      '<paper-icon-item><iron-icon icon="icons:arrow-forward"></paper-icon-item>'+
+                     '<paper-icon-item>'+ element.direction +'</paper-icon-item></div>'+
+                   '<div class="card-actions"><paper-icon-item class="horizontal justified">'+
+                    'Abfahrt:<paper-button style="font-size:35px;">'+  element.scheduled.substring(11, element.scheduled.length-3) +'</paper-button>'+
+                    'Ankunft: <paper-button style="font-size:15px;">'+ element.arrival.substring(11, element.arrival.length-3) +'</paper-button></paper-icon-item></div>');
+             });
+        }
+
+        function fillEvents(news,arrayElement) {
+            
+            $(news).find(".card-content").empty();
+            alert("Size in Fill :"+ arrayElement.length);
+            $.each(arrayElement, function(index, element) {
+                    //alert("BRrr :"+ element.roomsView[0].name);
+                 $(news).find(".card-content").append('<div class="horizontal justified">'+ 
+                     '<paper-icon-item>'+ element.name +'</paper-icon-item>'+
+                     '<paper-icon-item>'+ element.roomsView[0].name +'</paper-icon-item></div>'+
+                   '<div class="card-actions"><paper-icon-item class="horizontal justified">'+
+                    'Start:<paper-button style="font-size:35px;">'+  element.startTime.substring(11, element.scheduled.length-3) +'</paper-button>'+
+                    'Ende: <paper-button style="font-size:15px;">'+ element.endTime.substring(11, element.arrival.length-3) +'</paper-button></paper-icon-item></div>');
+             });
+        }
 
         function convertStampToDate(stamp){
             var t = new Date(stamp*1000);
