@@ -25,7 +25,7 @@
              <link rel="stylesheet" href="css/bootstrap-theme.min.css">
              <link rel="stylesheet" href="css/bootstrap.css">
              <link rel="stylesheet" href="css/bootstrap.min.css">
-       		   <script type="text/javascript" src="http://oap.accuweather.com/launch.js"></script>
+       		   <!--script type="text/javascript" src="http://oap.accuweather.com/launch.js"></script-->
 
             <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" />
           <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
@@ -42,6 +42,8 @@
           <link rel="import" href="bower_components/paper-styles/typography.html">
           <link rel="import" href="bower_components/paper-card/paper-card.html">
           <link rel="import" href="bower_components/paper-toolbar/paper-toolbar.html">
+          <link rel="import" href="bower_components/paper-drawer-panel/paper-drawer-panel.html">
+           <link rel="import" href="bower_components/paper-drawer-toggle/paper-drawer-toggle.html">
         </head>
 
         <body class="mBody">     
@@ -53,9 +55,14 @@
             }
             paper-card {
               width: 100%;
+              --paper-card-header-color: white;
+              elevation:2;
             }
             .horizontal {
               @apply(--layout-horizontal);
+            }
+            .vertical {
+              @apply(--layout-vertical);
             }
             .justified {
               @apply(--layout-justified);
@@ -68,12 +75,12 @@
               color:white;
             }
             .events{
-              color: var(--paper-cyan-800);
+              background: var(--paper-teal-600);
               color:white;
-              /*@apply(--paper-font-headline);*/
+              --paper-card-header-color: white;
             }
             .cyan {
-              background: var(--paper-cyan-500);
+              background: var(--paper-cyan-800);
             }
             .dark {
               background: var(--paper-blue-grey-500);
@@ -96,6 +103,9 @@
             .infoDay,.dateNews{
                font-size:15px;
                color:white;
+            }
+            .custombutton{
+              font-size:  @apply(--paper-font-display2);
             }
             p.cafe-light, .fakNewsBody{
                @apply(--paper-font-body);
@@ -177,7 +187,7 @@
             margin: 4px;
             flex: 0 0 auto;
           }
-          .cafe-header div{ @apply(--paper-font-headline); }
+          .cafe-header div{ @apply(--paper-font-headline);}
           .card-content{@apply(--paper-font-headline);}
           .cafe-light { color: var(--paper-grey-600); }
           .cafe-lighting { color: var(--paper-grey-400); }
@@ -206,33 +216,56 @@
             color: var(--paper-amber-500);
           }
           iron-icon.star:last-of-type { color: var(--paper-grey-500); }
+          .ruck,.time{margin-right: 40px;}
+          paper-toolbar.main{
+            font-size:@apply(--paper-font-headline);
+            background: color: var(--paper-grey-500);
+          }
+           paper-toolbar.drawer{
+            font-size:@apply(--paper-font-headline);
+            background: color: var(--paper-brown-500);
+          }
         </style>
 
-          <paper-drawer-panel>
-          <paper-toolbar>
-          <paper-icon-button icon="menu"></paper-icon-button>
-              <span class="title">Campus TV</span>
-              <paper-icon-item>
-            <paper-item-body one-line>
-              <div class="time">14h54m</div>
+          <paper-drawer-panel >
+            <div drawer>
+              <paper-toolbar class="drawer">
+                <span>Mitarbeiter</span>
+              </paper-toolbar>
+
+            </div>
+          
+          <div main> 
+
+          <paper-toolbar class="main">
+              <paper-icon-button paper-drawer-toggle icon="menu"></paper-icon-button>
+              <span title class="flex">Campus TV</span>
+              <paper-icon-button icon="refresh"></paper-icon-button>
+
+              <!--paper-icon-item>
+            <paper-item-body one-line class="ruck">
+              <div class="time" style="margin-left: 10px;">14h54m</div>
             </paper-item-body>
-          </paper-icon-item>
-              <paper-item-body>
+          </paper-icon-item-->
+              <!--paper-item-body>
                       <div class="navbar-header weather">
                                     <a href="http://www.accuweather.com/de/de/wurzburg/97070/weather-forecast/167557" class="aw-widget-legal">
-                                        <!--
+                                        <!
                                         By accessing and/or using this code snippet, you agree to AccuWeather’s terms and conditions (in English) which can be found at http://www.accuweather.com/en/free-weather-widgets/terms and AccuWeather’s Privacy Statement (in English) which can be found at http://www.accuweather.com/en/privacy.
-                                        -->
+                                        >
                                     </a><div id="awcc1452522010263" class="aw-widget-current label"  data-locationkey="167557" data-unit="c" data-language="de" data-useip="false" data-uid="awcc1452522010263"></div><script type="text/javascript" src="http://oap.accuweather.com/launch.js"></script> 
                                 </div> 
                   <script type="text/javascript" src="http://oap.accuweather.com/launch.js"></script> 
-            </paper-item-body>
+            </paper-item-body-->
+
             
           </paper-toolbar>
+          </div>
+
         </paper-drawer-panel>
 
         <!--  Content starts here-->        
-                <div id="notes">
+        <!--div id="notes">
 
             <paper-card class="test" image = "./bus.jpg" alt="Donuts">
             <div class="card-content">
@@ -263,24 +296,23 @@
           
           <paper-card heading="Laufende Veranstaltungen" image="./icons/event.jpg" class="events">
            <div class="card-content">
-            <div class="horizontal justified"> 
-                     <paper-icon-item></paper-icon-item>
-                      <paper-icon-item><iron-icon icon="icons:arrow-forward"></paper-icon-item>
-                     <p><paper-icon-item></paper-icon-item></p>
+            <!--div class="vertical justified"> 
+                     <div><paper-icon-item>sfgf</paper-icon-item></div>
+                      <div><paper-icon-item><iron-icon icon="icons:room"></iron-icon>sfgfgegeg</paper-icon-item></div>
                    </div>
                    <div class="card-actions">
                      <paper-icon-item class="horizontal justified">
-                          Start: <paper-button></paper-button>
-                          Ende: <paper-button></paper-button>
+                          Start: <paper-button class="custombutton">15:15</paper-button>
+                          Ende: <paper-button>16:45</paper-button>
                     </paper-icon-item>
-                  </div>
-                  </div>
+                  </div-->
+                  <!--/div>
           </paper-card>
 
           <paper-card heading="Mensateria" image="./icons/mensateria.jpg" alt="Donuts" class="amber meals">
 
                <div class="card-content">
-                  <div class="cafe-header card-actions">
+                  <!--div class="cafe-header card-actions">
                   <div>
                         <img class="meat-icon" style="margin-right: 5px;" src="./icons/gefluegel.jpg"></img>
                         <span class="meat-title">Gemuese mit Fleisch</span>
@@ -289,7 +321,7 @@
                           <iron-icon icon="shopping-cart"  style="margin-right: 5px;" item-icon></iron-icon>
                           <span class="meat-price">3,75 </span>
                       </paper-icon-item>
-                  </div>
+                  </div-->
 
                   <!--iron-list is="dom-repeat" items="[[data]]" as="item" scroll-target="html">
                   <template>
@@ -303,7 +335,7 @@
                   </template>
                    </iron-list-->
 
-                 </div> 
+                 <!--/div> 
 
           </paper-card>
 
@@ -321,13 +353,11 @@
             </div>
           </paper-card-->
 
-          <paper-card heading="Mensa am Hubland" image="./icons/mensahubland.jpg" alt="Donuts" class="dark mealshub">
-
-                 <div class="card-content">
-                 </div>
+          <!--paper-card heading="Mensa am Hubland" image="./icons/mensahubland.jpg" alt="Donuts" class="dark mealshub">
+                 <div class="card-content"> </div>
           </paper-card>
 
-        </div>
+        </div-->
         </template>
     </dom-module>
 

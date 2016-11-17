@@ -208,7 +208,21 @@
           function setFakNews(element){
              doAjaxFakNews(function(result){
                 if (result == true ){
-                   //alert("Hat geklappt mit News");
+                   //  var toSend =[];
+                   // $.each(resFakNews, function(index, element) {
+                   //      var mydate = new Date(element.duedate);
+                   //      alert("Due Date"+mydate);
+                   //      if(mydate < new Date()) {
+                   //          alert("Doch 1");
+                   //          toSend.push();
+                   //      }
+                   //  });
+
+                   // alert("In to Date lentgh"+toSend.length);
+
+                   // $.each(toSend, function(index, element) {
+                   //       fillFakNews(element, arrayElement);
+                   //  });
                    fillFakNews(element, resFakNews[0]);
                    // setInterval(function () {
                    //      fillFakNews(element, resFakNews[0]);
@@ -274,7 +288,7 @@
             $.each(arrayElement, function(index, element) {
                  $(news).find(".card-content").append('<div class="cafe-header card-actions">'+
                         '<div><img class="meat-icon"  style="margin-right: 5px;" src="'+decodeFoodType(element.foodtype)+'"></img>'+
-                        '<span class="meat-title">'+element.name+'</span></div>'+
+                        '<span class="meat-title" style="font-size:25px;">'+element.name+'</span></div>'+
                        '<paper-icon-item>'+
                           '<iron-icon  style="margin-right: 5px;" icon="shopping-cart" item-icon></iron-icon>'+
                           '<span class="meat-price">'+element.price+' €</span>'+
@@ -310,10 +324,12 @@
                     $(news).find(".titleNews").text(title); 
                     $(news).find(".dateNews").text(date.substring(0, 10));
                     $(news).find(".fakNewsBody").text(desc);
+
+                    
         }
 
         function fillBus(news,arrayElement) {
-              $(news).find(".card-content").empty();
+            $(news).find(".card-content").empty();
             $.each(arrayElement, function(index, element) {
                  $(news).find(".card-content").append('<div class="horizontal justified">'+ 
                      '<paper-icon-item>'+ element.stopName +'</paper-icon-item>'+
@@ -323,20 +339,24 @@
                     'Abfahrt:<paper-button style="font-size:35px;">'+  element.scheduled.substring(11, element.scheduled.length-3) +'</paper-button>'+
                     'Ankunft: <paper-button style="font-size:15px;">'+ element.arrival.substring(11, element.arrival.length-3) +'</paper-button></paper-icon-item></div>');
              });
+
+            // if(new Date().getMinutes === 8 ||new Date().getMinutes === 28 ||||new Date().getMinutes === 48 ){
+            //             news.elevation = 3;
+            // }
         }
 
         function fillEvents(news,arrayElement) {
             
             $(news).find(".card-content").empty();
-            alert("Size in Fill :"+ arrayElement.length);
+            //alert("Size in Fill :"+ arrayElement.length);
             $.each(arrayElement, function(index, element) {
-                    //alert("BRrr :"+ element.roomsView[0].name);
-                 $(news).find(".card-content").append('<div class="horizontal justified">'+ 
-                     '<paper-icon-item>'+ element.name +'</paper-icon-item>'+
-                     '<paper-icon-item>'+ element.roomsView[0].name +'</paper-icon-item></div>'+
+                    //alert("BRrr :"+ element.startTime.substring(11, element.startTime.length-3));
+                 $(news).find(".card-content").append('<div class="vertical justified">'+ 
+                     '<div><paper-icon-item style="font-size:25px;">'+ element.name +'</paper-icon-item></div>'+
+                     '<paper-icon-item><iron-icon icon="icons:room"></iron-icon>'+ element.roomsView[0].name +'</paper-icon-item></div>'+
                    '<div class="card-actions"><paper-icon-item class="horizontal justified">'+
-                    'Start:<paper-button style="font-size:35px;">'+  element.startTime.substring(11, element.scheduled.length-3) +'</paper-button>'+
-                    'Ende: <paper-button style="font-size:15px;">'+ element.endTime.substring(11, element.arrival.length-3) +'</paper-button></paper-icon-item></div>');
+                    'Start:<paper-button style="font-size:35px;">'+  element.startTime.substring(11, element.startTime.length-3) +'</paper-button>'+
+                    'Ende: <paper-button style="font-size:15px;">'+ element.endTime.substring(11, element.endTime.length-3) +'</paper-button></paper-icon-item></div>');
              });
         }
 
