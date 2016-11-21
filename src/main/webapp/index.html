@@ -35,6 +35,9 @@
           <link rel="import" href="bower_components/iron-icons/iron-icons.html">
           <link rel="import" href="bower_components/iron-flex-layout/iron-flex-layout.html">
           <link rel="import" href="bower_components/paper-button/paper-button.html">
+          <link rel="import" href="bower_components/paper-icon-button/paper-icon-button.html">
+          <link rel="import" href="bower_components/paper-menu/paper-menu.html">
+          <link rel="import" href="bower_components/paper-menu-button/paper-menu-button.html">
           <link rel="import" href="bower_components/paper-checkbox/paper-checkbox.html">
           <link rel="import" href="bower_components/paper-icon-button/paper-icon-button.html">
           <link rel="import" href="bower_components/paper-styles/color.html">
@@ -42,8 +45,7 @@
           <link rel="import" href="bower_components/paper-styles/typography.html">
           <link rel="import" href="bower_components/paper-card/paper-card.html">
           <link rel="import" href="bower_components/paper-toolbar/paper-toolbar.html">
-          <link rel="import" href="bower_components/paper-drawer-panel/paper-drawer-panel.html">
-           <link rel="import" href="bower_components/paper-drawer-toggle/paper-drawer-toggle.html">
+          <link rel="import" href="bower_components/paper-button/paper-button.html">
         </head>
 
         <body class="mBody">     
@@ -217,55 +219,57 @@
           }
           iron-icon.star:last-of-type { color: var(--paper-grey-500); }
           .ruck,.time{margin-right: 40px;}
-          paper-toolbar.main{
-            font-size:@apply(--paper-font-headline);
-            background: color: var(--paper-grey-500);
+          paper-toolbar{font-size:@apply(--paper-font-headline);}
+          paper-button {
+              display: block;
+              background: #4285f4;
+              color: #fff;
           }
-           paper-toolbar.drawer{
-            font-size:@apply(--paper-font-headline);
-            background: color: var(--paper-brown-500);
+          paper-menu {
+            display: block;
           }
+          paper-menu-button {
+            margin: auto;
+          }
+
         </style>
 
-          <paper-drawer-panel >
-            <div drawer>
-              <paper-toolbar class="drawer">
-                <span>Mitarbeiter</span>
-              </paper-toolbar>
-
-            </div>
-          
-          <div main> 
-
-          <paper-toolbar class="main">
-              <paper-icon-button paper-drawer-toggle icon="menu"></paper-icon-button>
-              <span title class="flex">Campus TV</span>
-              <paper-icon-button icon="refresh"></paper-icon-button>
-
-              <!--paper-icon-item>
+          <paper-drawer-panel>
+          <paper-toolbar>
+             <!--paper-icon-button icon="menu"></paper-icon-button-->
+             <paper-menu-button>
+            <paper-icon-button icon="menu" class="dropdown-trigger" alt="menu"></paper-icon-button>
+            <paper-menu class="dropdown-content">
+                <paper-item>Menu1</paper-item>
+                 <paper-item>Menu1</paper-item>
+                  <paper-item>Menu1</paper-item>
+                   <paper-item>Menu1</paper-item>
+                    <paper-item>Menu1</paper-item>
+                      <paper-item>Menu1</paper-item>
+            </paper-menu>
+          </paper-menu-button>
+              <span class="title">Campus TV</span>
+              <paper-icon-item>
             <paper-item-body one-line class="ruck">
               <div class="time" style="margin-left: 10px;">14h54m</div>
             </paper-item-body>
-          </paper-icon-item-->
-              <!--paper-item-body>
+          </paper-icon-item>
+              <paper-item-body>
                       <div class="navbar-header weather">
                                     <a href="http://www.accuweather.com/de/de/wurzburg/97070/weather-forecast/167557" class="aw-widget-legal">
-                                        <!
+                                        <!--
                                         By accessing and/or using this code snippet, you agree to AccuWeather’s terms and conditions (in English) which can be found at http://www.accuweather.com/en/free-weather-widgets/terms and AccuWeather’s Privacy Statement (in English) which can be found at http://www.accuweather.com/en/privacy.
-                                        >
+                                        -->
                                     </a><div id="awcc1452522010263" class="aw-widget-current label"  data-locationkey="167557" data-unit="c" data-language="de" data-useip="false" data-uid="awcc1452522010263"></div><script type="text/javascript" src="http://oap.accuweather.com/launch.js"></script> 
                                 </div> 
                   <script type="text/javascript" src="http://oap.accuweather.com/launch.js"></script> 
-            </paper-item-body-->
-
+            </paper-item-body>
             
           </paper-toolbar>
-          </div>
-
         </paper-drawer-panel>
 
         <!--  Content starts here-->        
-        <!--div id="notes">
+                <div id="notes">
 
             <paper-card class="test" image = "./bus.jpg" alt="Donuts">
             <div class="card-content">
@@ -306,7 +310,7 @@
                           Ende: <paper-button>16:45</paper-button>
                     </paper-icon-item>
                   </div-->
-                  <!--/div>
+                  </div>
           </paper-card>
 
           <paper-card heading="Mensateria" image="./icons/mensateria.jpg" alt="Donuts" class="amber meals">
@@ -335,7 +339,7 @@
                   </template>
                    </iron-list-->
 
-                 <!--/div> 
+                 </div> 
 
           </paper-card>
 
@@ -353,11 +357,11 @@
             </div>
           </paper-card-->
 
-          <!--paper-card heading="Mensa am Hubland" image="./icons/mensahubland.jpg" alt="Donuts" class="dark mealshub">
+          <paper-card heading="Mensa am Hubland" image="./icons/mensahubland.jpg" alt="Donuts" class="dark mealshub">
                  <div class="card-content"> </div>
           </paper-card>
 
-        </div-->
+        </div>
         </template>
     </dom-module>
 
@@ -373,6 +377,7 @@
                   },
                     created: function() {
                     //this.data = ['orange', 'strawberry', 'banana'];
+                    this.letters = ['alpha','beta','gamma','delta','epsilon'];
                     },
                   ready: function() {
                     var currentTime = Polymer.dom(this.root).querySelector('.time');

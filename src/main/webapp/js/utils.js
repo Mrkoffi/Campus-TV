@@ -130,7 +130,7 @@
     }
      function doAjaxEvents(callback) {
              $.ajax({
-            url: 'https://apistaging.fiw.fhws.de/mo/api/events/today',
+            url: 'https://apistaging.fiw.fhws.de/mo/api/events/today?size=100',
             type: 'GET',
             dataType: "json",
             headers:{
@@ -250,25 +250,43 @@
                  doAjaxEvents(function(result){
                     if (result == true ){
                         //fillEvents(element,resEvent);
-                        //var bussi = [];
-                        //alert("Before filter "+ resEvent.length);
-                        //  $.each(resEvent, function(index, element) {
-                        //      var currentTime = new Date();
-                        //     var h = currentTime.getHours();
-                        //     var m = currentTime.getMinutes();
+                        var bussi = [];
+                        alert("Before filter "+ resEvent.length);
+                         $.each(resEvent, function(index, element) {
+                            var currentTime = new Date();
 
-                        //     var heures = parseInt(element.startTime.substring(11, element.scheduled.length-6));
-                        //     if(h <= heures)
-                        //          bussi.push(element);
+                           if(currentTime < new Date(element.endTime))  
+                            {
+                                //alert("VErgleich :"+ currentTime + "--> EndTime: "+element.endTime);
+                                bussi.push(element);
+                            }
+                            //var h = currentTime.getHours();
+                            //var m = currentTime.getMinutes();
 
-                        //     });
-                        
+                            //var heures = parseInt(element.startTime.substring(11, element.scheduled.length-6));
+                            //if(h <= heures)
+                              //   bussi.push(element);
+
+                            });
+
                          var newArray=[];
-                         newArray.push(resEvent[0]);
-                         newArray.push(resEvent[1]);
-                         newArray.push(resEvent[2]);
-                         newArray.push(resEvent[3]);
-                         newArray.push(resEvent[4]);
+
+                        if (bussi.length >= 5){
+                            var newArray=[]; 
+                            for (var i = 0; i < 6; i++) {
+                              newArray.push(bussi[i]);
+                            }
+                        }else{
+                            for (var i = 0; i < bussi.length; i++) {
+                              newArray.push(bussi[i]);
+                            }
+                        }
+                         // var newArray=[];
+                         // newArray.push(resEvent[0]);
+                         // newArray.push(resEvent[1]);
+                         // newArray.push(resEvent[2]);
+                         // newArray.push(resEvent[3]);
+                         // newArray.push(resEvent[4]);
 
                          fillEvents(element,newArray);
                     } else alert("Length after failed reN :");
@@ -324,21 +342,35 @@
                     $(news).find(".titleNews").text(title); 
                     $(news).find(".dateNews").text(date.substring(0, 10));
                     $(news).find(".fakNewsBody").text(desc);
+                    var mydate = new Date(date);
+                    //alert("Due Datett"+mydate+"");
+                   
+                    mydate.setDate(mydate.getDate() + 1);
+                    //alert("Due Date plus 1 " + mydate);
 
                     
         }
 
         function fillBus(news,arrayElement) {
             $(news).find(".card-content").empty();
+
+            if(arrayElement.length == 0){
+                $(news).find(".card-content").append('<div class="horizontal justified">'+ 
+                     '<paper-icon-item>Keine Verbindungen zurzeit verfügbar !</paper-icon-item>'+
+                   '<div class="card-actions"><paper-icon-item class="horizontal justified">'+
+                    'Abfahrt:<paper-button style="font-size:35px;">--</paper-button>'+
+                    'Ankunft: <paper-button style="font-size:15px;">--</paper-button></paper-icon-item></div>');
+            }else{
             $.each(arrayElement, function(index, element) {
                  $(news).find(".card-content").append('<div class="horizontal justified">'+ 
                      '<paper-icon-item>'+ element.stopName +'</paper-icon-item>'+
                       '<paper-icon-item><iron-icon icon="icons:arrow-forward"></paper-icon-item>'+
                      '<paper-icon-item>'+ element.direction +'</paper-icon-item></div>'+
                    '<div class="card-actions"><paper-icon-item class="horizontal justified">'+
-                    'Abfahrt:<paper-button style="font-size:35px;">'+  element.scheduled.substring(11, element.scheduled.length-3) +'</paper-button>'+
-                    'Ankunft: <paper-button style="font-size:15px;">'+ element.arrival.substring(11, element.arrival.length-3) +'</paper-button></paper-icon-item></div>');
+                    'Abfahrt:<paper-button style="font-size:35px;">'+  element.scheduled.substring(11, element.scheduled.length-9) +'</paper-button>'+
+                    'Ankunft: <paper-button style="font-size:15px;">'+ element.arrival.substring(11, element.arrival.length-9) +'</paper-button></paper-icon-item></div>');
              });
+            }
 
             // if(new Date().getMinutes === 8 ||new Date().getMinutes === 28 ||||new Date().getMinutes === 48 ){
             //             news.elevation = 3;
@@ -346,8 +378,17 @@
         }
 
         function fillEvents(news,arrayElement) {
-            
-            $(news).find(".card-content").empty();
+                 $(news).find(".card-content").empty();
+
+            if(arrayElement.length == 0){
+                    $(news).find(".card-content").append('<div class="vertical justified">'+ 
+                     '<div><paper-icon-item style="font-size:25px;">Keine laufende Lehrveranstaltungen !</paper-icon-item></div>'+
+                     '<paper-icon-item><iron-icon icon="icons:room"></iron-icon>--</paper-icon-item></div>'+
+                   '<div class="card-actions"><paper-icon-item class="horizontal justified">'+
+                    'Start:<paper-button style="font-size:35px;">--</paper-button>'+
+                    'Ende: <paper-button style="font-size:15px;">--</paper-button></paper-icon-item></div>');
+            }
+           
             //alert("Size in Fill :"+ arrayElement.length);
             $.each(arrayElement, function(index, element) {
                     //alert("BRrr :"+ element.startTime.substring(11, element.startTime.length-3));
@@ -355,8 +396,8 @@
                      '<div><paper-icon-item style="font-size:25px;">'+ element.name +'</paper-icon-item></div>'+
                      '<paper-icon-item><iron-icon icon="icons:room"></iron-icon>'+ element.roomsView[0].name +'</paper-icon-item></div>'+
                    '<div class="card-actions"><paper-icon-item class="horizontal justified">'+
-                    'Start:<paper-button style="font-size:35px;">'+  element.startTime.substring(11, element.startTime.length-3) +'</paper-button>'+
-                    'Ende: <paper-button style="font-size:15px;">'+ element.endTime.substring(11, element.endTime.length-3) +'</paper-button></paper-icon-item></div>');
+                    'Start:<paper-button style="font-size:35px;">'+  element.startTime.substring(11, element.startTime.length-9) +'</paper-button>'+
+                    'Ende: <paper-button style="font-size:15px;">'+ element.endTime.substring(11, element.endTime.length-9) +'</paper-button></paper-icon-item></div>');
              });
         }
 
